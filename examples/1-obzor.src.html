@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru" data-look="bright">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ig-type" content="Узел с графикой">
+<title>Как агент делает инфографику</title>
+</head>
+<body>
+<main class="ig">
+
+  <header class="ig-hero">
+    <p class="ig-kicker">Навык /infographic · обзор</p>
+    <div>
+      <h1>Как агент делает инфографику</h1>
+      <p class="ig-lead">Форма - по устройству материала, облик - по читателю, графика - на каждом экране.</p>
+    </div>
+    <div class="ig-hero-figure"><b>10</b><span>обликов на выбор</span></div>
+  </header>
+
+  <p class="ig-banner"><b>Главное:</b> одна HTML-страница без интернета; перед сдачей агент сам проверяет её снимком в Chrome, в том числе на ширине телефона.</p>
+
+  <section class="ig-section">
+    <h2 class="ig-h"><i data-icon="workflow"></i>Шесть шагов</h2>
+    <ol class="ig-chain">
+      <li class="ig-step" data-tone="1"><i data-icon="file-text"></i><h3>Материал</h3><p>Главная мысль одной фразой, главная цифра - в шапку</p></li>
+      <li class="ig-step" data-tone="2"><i data-icon="layers"></i><h3>Форма</h3><p>Цифры, цепочка, сравнение, схема, карта</p></li>
+      <li class="ig-step" data-tone="3"><i data-icon="sparkles"></i><h3>Облик</h3><p>Строгий для руководства, яркий для команды</p></li>
+      <li class="ig-step" data-tone="4"><i data-icon="puzzle"></i><h3>Графика</h3><p>Иллюстрации, объёмные картинки, пиктограммы</p></li>
+      <li class="ig-step" data-tone="5"><i data-icon="box"></i><h3>Сборка</h3><p>Шрифты и картинки встроены в один файл</p></li>
+      <li class="ig-step" data-tone="1"><i data-icon="circle-check"></i><h3>Проверка</h3><p>Снимок на 1280 и на телефоне 390</p></li>
+    </ol>
+  </section>
+
+  <section class="ig-hub">
+    <div class="ig-hub-col">
+      <h3>Откуда графика</h3>
+      <div class="ig-hub-item" data-tone="1">
+        <article class="ig-card ig-feature" data-tone="1">
+          <div class="ig-art"><i data-illus="servers"></i></div>
+          <div class="ig-feature-body">
+            <h3>Векторные иллюстрации</h3>
+            <p>Серверы, базы, документы, люди, завод - красятся в цвета облика.</p>
+          </div>
+          <div class="ig-feature-badges"><span class="ig-count">13</span><small>рисунков</small></div>
+        </article>
+      </div>
+      <div class="ig-hub-item" data-tone="2">
+        <article class="ig-card ig-feature" data-tone="2">
+          <div class="ig-art"><i data-illus="documents"></i></div>
+          <div class="ig-feature-body">
+            <h3>Значки строк</h3>
+            <p>Lucide: у каждого заголовка и шага свой значок.</p>
+          </div>
+          <div class="ig-feature-badges"><span class="ig-count">56</span><small>значков</small></div>
+        </article>
+      </div>
+      <div class="ig-hub-item" data-tone="3">
+        <article class="ig-card ig-feature" data-tone="3">
+          <div class="ig-art"><i data-illus="chart"></i></div>
+          <div class="ig-feature-body">
+            <h3>Ряды пиктограмм</h3>
+            <i data-pict="user" data-n="10" data-on="4"></i>
+            <p>Доля от целого видна без подписи: 4 из 10.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="ig-hub-center" data-tone="4"><i data-illus="hub"></i></div>
+
+    <div class="ig-hub-col">
+      <h3>Что даёт сборка</h3>
+      <div class="ig-hub-item" data-tone="4">
+        <article class="ig-card ig-feature" data-tone="4">
+          <div class="ig-art"><i data-illus="cloud"></i></div>
+          <div class="ig-feature-body">
+            <h3>Без интернета</h3>
+            <p>Внешний адрес на странице - сборщик откажет и назовёт его.</p>
+          </div>
+          <div class="ig-feature-badges"><span class="ig-count">0</span><small>запросов в сеть</small></div>
+        </article>
+      </div>
+      <div class="ig-hub-item" data-tone="5">
+        <article class="ig-card ig-feature" data-tone="5">
+          <div class="ig-art"><i data-illus="key-lock"></i></div>
+          <div class="ig-feature-body">
+            <h3>Картинки локальной моделью</h3>
+            <p>FLUX.2 Klein на Маке, по желанию. Наружу ничего не уходит.</p>
+          </div>
+          <div class="ig-feature-badges"><span class="ig-timer" style="--v: 50"><b>35-50</b><small>секунд</small></span></div>
+        </article>
+      </div>
+      <div class="ig-hub-item" data-tone="1">
+        <article class="ig-card ig-feature" data-tone="1">
+          <div class="ig-art"><i data-illus="people"></i></div>
+          <div class="ig-feature-body">
+            <h3>Одним словом</h3>
+            <p>«Строже», «ярче», «чертежом» - меняется облик, содержание остаётся.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ig-section">
+    <h2 class="ig-h"><i data-icon="chart-column"></i>Что внутри</h2>
+    <div class="ig-stats">
+      <div class="ig-card ig-stat" data-tone="1"><i data-3d="gear"></i><b>17</b><span>форм блока</span><small>от крупных цифр до ментальной карты</small></div>
+      <div class="ig-card ig-stat" data-tone="2"><i data-3d="bulb"></i><b>10</b><span>обликов</span><small>и свои фирменные из локальной папки</small></div>
+      <div class="ig-card ig-stat" data-tone="3"><i data-3d="rocket"></i><b>38</b><span>объёмных картинок</span><small>Microsoft Fluent 3D</small></div>
+      <div class="ig-card ig-stat" data-tone="4"><i data-3d="check"></i><b>390</b><span>точек: проверка телефона</span><small>текст не вылезает, прокрутки вбок нет</small></div>
+    </div>
+  </section>
+
+  <aside class="ig-callout" data-kind="tip"><i data-icon="lightbulb"></i><div><b>Таблица в материале - не таблица на странице.</b> Цены - полосами на общей шкале, «что где стоит» - схемой, «вариант, плюсы, минусы» - колонками.</div></aside>
+
+  <footer class="ig-foot"><p>Источник: инструкция навыка (SKILL.md) и состав движка.</p></footer>
+
+</main>
+</body>
+</html>

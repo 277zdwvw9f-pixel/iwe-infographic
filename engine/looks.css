@@ -1,0 +1,1144 @@
+/* Infographic components and ten looks.
+   Components only read variables; a look is a set of variables plus a few overrides
+   under html[data-look=...]. Colour "tones" 1-5 are picked per element with data-tone. */
+
+/* ---------- Looks: variables ---------- */
+
+html[data-look="strict"] {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --ink: #111111;
+  --muted: #5c5c5c;
+  --line: #d9d9d9;
+  --line-strong: #111111;
+  --accent: #ff4f00;
+  --good: #1a7f37;
+  --bad: #ff4f00;
+  --t1: #ff4f00;
+  --t2: #111111;
+  --t3: #4a4a4a;
+  --t4: #8a8a8a;
+  --t5: #111111;
+  --soft-pct: 10%;
+  --font-body: "Onest", system-ui, sans-serif;
+  --font-head: "Onest", system-ui, sans-serif;
+  --font-num: "Onest", system-ui, sans-serif;
+  --font-label: "JetBrains Mono", ui-monospace, monospace;
+  --head-weight: 800;
+  --num-weight: 800;
+  --head-tracking: -0.03em;
+  --h1-size: 64px;
+  --h2-size: 32px;
+  --h3-size: 20px;
+  --hero-num-size: 120px;
+  --stat-num-size: 52px;
+  --radius: 0;
+  --radius-lg: 0;
+  --icon-radius: 0;
+  --shadow: none;
+  --card-border: 0;
+  --gap: 24px;
+  --gap-section: 72px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: var(--accent);
+  --hero-pad: 0 0 40px;
+}
+
+html[data-look="bright"] {
+  --bg: #f3f5fb;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #55607a;
+  --line: #e3e7f0;
+  --line-strong: #c3cadb;
+  --accent: #4f46e5;
+  --good: #059669;
+  --bad: #e11d48;
+  --t1: #2563eb;
+  --t2: #f97316;
+  --t3: #10b981;
+  --t4: #8b5cf6;
+  --t5: #ec4899;
+  --soft-pct: 13%;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-head: "Inter", system-ui, sans-serif;
+  --font-num: "Inter", system-ui, sans-serif;
+  --font-label: "Inter", system-ui, sans-serif;
+  --head-weight: 800;
+  --num-weight: 800;
+  --head-tracking: -0.025em;
+  --h1-size: 56px;
+  --h2-size: 30px;
+  --h3-size: 19px;
+  --hero-num-size: 104px;
+  --stat-num-size: 46px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --icon-radius: 14px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px rgba(15, 23, 42, 0.07);
+  --card-border: 1px solid #edf0f6;
+  --gap: 20px;
+  --gap-section: 64px;
+  --hero-bg: linear-gradient(118deg, #1e3a8a 0%, #4338ca 48%, #9333ea 100%);
+  --hero-ink: #ffffff;
+  --hero-muted: rgba(255, 255, 255, 0.82);
+  --hero-accent: #fde047;
+  --hero-pad: 56px 56px 52px;
+}
+
+html[data-look="watercolor"] {
+  --bg: #f6f0e4;
+  --card: transparent;
+  --ink: #2f2a26;
+  --muted: #6b6159;
+  --line: #cfc3b2;
+  --line-strong: #4a423b;
+  --accent: #c8553d;
+  --good: #4f7f52;
+  --bad: #c8553d;
+  --t1: #5b8fc7;
+  --t2: #e39b4b;
+  --t3: #6fa77a;
+  --t4: #c8553d;
+  --t5: #9a7fc4;
+  --soft-pct: 30%;
+  --font-body: "Nunito", system-ui, sans-serif;
+  --font-head: "Caveat", "Nunito", cursive;
+  --font-num: "Caveat", "Nunito", cursive;
+  --font-label: "Nunito", system-ui, sans-serif;
+  --head-weight: 700;
+  --num-weight: 700;
+  --head-tracking: 0;
+  --h1-size: 80px;
+  --h2-size: 48px;
+  --h3-size: 30px;
+  --hero-num-size: 136px;
+  --stat-num-size: 68px;
+  --radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  --radius-lg: 0;
+  --icon-radius: 50%;
+  --shadow: none;
+  --card-border: 2px solid var(--line-strong);
+  --gap: 28px;
+  --gap-section: 72px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: #2f5f93;
+  --hero-pad: 24px 8px 32px;
+}
+
+html[data-look="blueprint"] {
+  --bg: #0e3a6e;
+  --card: rgba(255, 255, 255, 0.035);
+  --card-solid: #0e3a6e;
+  --ink: #f2f7ff;
+  --muted: #a9c4e8;
+  --line: rgba(255, 255, 255, 0.28);
+  --line-strong: #ffffff;
+  --accent: #ffd166;
+  --good: #8ef0c2;
+  --bad: #ff9f80;
+  --t1: #7fd1ff;
+  --t2: #ffd166;
+  --t3: #8ef0c2;
+  --t4: #ff9f80;
+  --t5: #c9b6ff;
+  --on-tone: #0e3a6e;
+  --soft-pct: 16%;
+  --font-body: "Onest", system-ui, sans-serif;
+  --font-head: "Onest", system-ui, sans-serif;
+  --font-num: "JetBrains Mono", ui-monospace, monospace;
+  --font-label: "JetBrains Mono", ui-monospace, monospace;
+  --head-weight: 700;
+  --num-weight: 700;
+  --head-tracking: -0.01em;
+  --h1-size: 56px;
+  --h2-size: 28px;
+  --h3-size: 18px;
+  --hero-num-size: 104px;
+  --stat-num-size: 46px;
+  --radius: 2px;
+  --radius-lg: 2px;
+  --icon-radius: 2px;
+  --shadow: none;
+  --card-border: 1.5px solid rgba(255, 255, 255, 0.8);
+  --gap: 22px;
+  --gap-section: 64px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: #ffd166;
+  --hero-pad: 32px 36px;
+}
+
+html[data-look="night"] {
+  --bg: #0a0f1e;
+  --card: #111a2e;
+  --card-solid: #111a2e;
+  --ink: #e8edf7;
+  --muted: #8d99b4;
+  --line: #22304b;
+  --line-strong: #3b4d72;
+  --accent: #22d3ee;
+  --good: #a3e635;
+  --bad: #fb7185;
+  --t1: #22d3ee;
+  --t2: #a3e635;
+  --t3: #f472b6;
+  --t4: #fbbf24;
+  --t5: #a78bfa;
+  --on-tone: #0a0f1e;
+  --soft-pct: 16%;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-head: "Inter", system-ui, sans-serif;
+  --font-num: "Inter", system-ui, sans-serif;
+  --font-label: "JetBrains Mono", ui-monospace, monospace;
+  --head-weight: 800;
+  --num-weight: 800;
+  --head-tracking: -0.025em;
+  --h1-size: 56px;
+  --h2-size: 30px;
+  --h3-size: 19px;
+  --hero-num-size: 104px;
+  --stat-num-size: 46px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --icon-radius: 12px;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --card-border: 1px solid rgba(148, 163, 184, 0.14);
+  --gap: 20px;
+  --gap-section: 64px;
+  --hero-bg: radial-gradient(620px 320px at 88% 18%, rgba(34, 211, 238, 0.26), transparent 70%), radial-gradient(520px 300px at 8% 110%, rgba(167, 139, 250, 0.24), transparent 70%), #0f1830;
+  --hero-ink: #ffffff;
+  --hero-muted: #a7b3cc;
+  --hero-accent: #22d3ee;
+  --hero-pad: 56px 56px 52px;
+}
+
+html[data-look="editorial"] {
+  --bg: #f6f1e7;
+  --card: transparent;
+  --card-solid: #f6f1e7;
+  --ink: #1b1a18;
+  --muted: #5d5850;
+  --line: #d9cfbd;
+  --line-strong: #1b1a18;
+  --accent: #c8102e;
+  --good: #3f6b2a;
+  --bad: #c8102e;
+  --t1: #c8102e;
+  --t2: #1f4e79;
+  --t3: #4f7a3a;
+  --t4: #b07d12;
+  --t5: #6d6a63;
+  --soft-pct: 11%;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-num: "Playfair Display", Georgia, serif;
+  --font-label: "Inter", system-ui, sans-serif;
+  --head-weight: 800;
+  --num-weight: 800;
+  --head-tracking: -0.01em;
+  --h1-size: 64px;
+  --h2-size: 34px;
+  --h3-size: 21px;
+  --hero-num-size: 116px;
+  --stat-num-size: 54px;
+  --radius: 0;
+  --radius-lg: 0;
+  --icon-radius: 0;
+  --shadow: none;
+  --card-border: 0;
+  --gap: 28px;
+  --gap-section: 64px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: var(--accent);
+  --hero-pad: 28px 0 36px;
+}
+
+html[data-look="pop"] {
+  --bg: #fdf3dc;
+  --card: #ffffff;
+  --card-solid: #ffffff;
+  --ink: #111111;
+  --muted: #3d3a35;
+  --line: #111111;
+  --line-strong: #111111;
+  --accent: #ff4fa3;
+  --good: #11865f;
+  --bad: #e5383b;
+  --t1: #ffd23f;
+  --t2: #3bceac;
+  --t3: #ff7b7b;
+  --t4: #6c8cff;
+  --t5: #c77dff;
+  --on-tone: #111111;
+  --soft-pct: 38%;
+  --font-body: "Onest", system-ui, sans-serif;
+  --font-head: "Unbounded", "Onest", sans-serif;
+  --font-num: "Unbounded", "Onest", sans-serif;
+  --font-label: "Onest", system-ui, sans-serif;
+  --head-weight: 800;
+  --num-weight: 800;
+  --head-tracking: -0.02em;
+  --h1-size: 50px;
+  --h2-size: 28px;
+  --h3-size: 18px;
+  --hero-num-size: 92px;
+  --stat-num-size: 40px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --icon-radius: 10px;
+  --shadow: 6px 6px 0 #111111;
+  --card-border: 3px solid #111111;
+  --gap: 24px;
+  --gap-section: 64px;
+  --hero-bg: #ffd23f;
+  --hero-ink: #111111;
+  --hero-muted: #2b2a26;
+  --hero-accent: #111111;
+  --hero-pad: 48px 52px 44px;
+}
+
+html[data-look="steampunk"] {
+  --bg: #e6d4ad;
+  --card: #f4e7c9;
+  --card-solid: #f4e7c9;
+  --ink: #2b1b10;
+  --muted: #5f4630;
+  --line: #b08a52;
+  --line-strong: #6b4a22;
+  --accent: #b5562a;
+  --good: #3f7f6a;
+  --bad: #8e2f24;
+  --t1: #b8863b;
+  --t2: #b5562a;
+  --t3: #3f8f7a;
+  --t4: #8e2f24;
+  --t5: #4a6378;
+  --on-tone: #fdf3dc;
+  --soft-pct: 22%;
+  --font-body: "PT Serif", Georgia, serif;
+  --font-head: "Old Standard TT", Georgia, serif;
+  --font-num: "Old Standard TT", Georgia, serif;
+  --font-label: "PT Serif", Georgia, serif;
+  --head-weight: 700;
+  --num-weight: 700;
+  --head-tracking: 0;
+  --h1-size: 60px;
+  --h2-size: 34px;
+  --h3-size: 21px;
+  --hero-num-size: 112px;
+  --stat-num-size: 54px;
+  --radius: 8px;
+  --radius-lg: 10px;
+  --icon-radius: 50%;
+  --shadow: 0 3px 0 #6e4c1e, 0 10px 22px rgba(60, 35, 10, 0.25);
+  --card-border: 3px solid #a8782f;
+  --gap: 26px;
+  --gap-section: 64px;
+  --hero-bg: linear-gradient(160deg, #3d2616, #22140b);
+  --hero-ink: #f3e2b8;
+  --hero-muted: #d2bb8e;
+  --hero-accent: #e0b25a;
+  --hero-pad: 52px 60px 48px;
+}
+
+html[data-look="fantasy"] {
+  --bg: #eee0bf;
+  --card: rgba(255, 249, 232, 0.62);
+  --card-solid: #f6ecd2;
+  --ink: #2b1b0e;
+  --muted: #6a5238;
+  --line: #b89a6a;
+  --line-strong: #5a3d1e;
+  --accent: #8b1e1e;
+  --good: #2f5d46;
+  --bad: #8b1e1e;
+  --t1: #2f5d46;
+  --t2: #a87a1f;
+  --t3: #8b1e1e;
+  --t4: #2b4a7a;
+  --t5: #6b4a8a;
+  --on-tone: #f6ecd2;
+  --soft-pct: 16%;
+  --font-body: "Alegreya", Georgia, serif;
+  --font-head: "Ruslan Display", "Alegreya", serif;
+  --font-num: "Alegreya", Georgia, serif;
+  --font-label: "Alegreya", Georgia, serif;
+  --head-weight: 400;
+  --num-weight: 800;
+  --head-tracking: 0.01em;
+  --h1-size: 56px;
+  --h2-size: 32px;
+  --h3-size: 22px;
+  --hero-num-size: 112px;
+  --stat-num-size: 58px;
+  --radius: 4px;
+  --radius-lg: 0;
+  --icon-radius: 50%;
+  --shadow: inset 0 0 30px rgba(120, 80, 30, 0.16);
+  --card-border: 3px double var(--line-strong);
+  --gap: 28px;
+  --gap-section: 68px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: #8b1e1e;
+  --hero-pad: 28px 8px 40px;
+}
+
+html[data-look="sketch"] {
+  --bg: #fbfaf5;
+  --card: #fffefa;
+  --card-solid: #fffefa;
+  --ink: #262626;
+  --muted: #595959;
+  --line: #9c9c9c;
+  --line-strong: #262626;
+  --accent: #b5452f;
+  --good: #4f7d4a;
+  --bad: #b5452f;
+  --t1: #2f5c8f;
+  --t2: #b5452f;
+  --t3: #4f7d4a;
+  --t4: #b07d22;
+  --t5: #6c5a99;
+  --on-tone: #ffffff;
+  --soft-pct: 12%;
+  --font-body: "Pangolin", "Nunito", sans-serif;
+  --font-head: "Neucha", "Pangolin", cursive;
+  --font-num: "Neucha", "Pangolin", cursive;
+  --font-label: "Pangolin", "Nunito", sans-serif;
+  --head-weight: 400;
+  --num-weight: 400;
+  --head-tracking: 0;
+  --h1-size: 66px;
+  --h2-size: 38px;
+  --h3-size: 24px;
+  --hero-num-size: 124px;
+  --stat-num-size: 62px;
+  --radius: 0;
+  --radius-lg: 0;
+  --icon-radius: 50%;
+  --shadow: none;
+  --card-border: 0;
+  --gap: 34px;
+  --gap-section: 72px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: var(--ink);
+  --hero-pad: 24px 8px 36px;
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-head); font-weight: var(--head-weight); line-height: 1.08; letter-spacing: var(--head-tracking); }
+h3 { font-size: var(--h3-size); }
+p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+b, strong { font-weight: 700; }
+a { color: inherit; }
+.ig-icon { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
+
+.ig { max-width: 1200px; margin: 0 auto; padding: 56px 48px 40px; display: flex; flex-direction: column; gap: var(--gap-section); }
+.ig-section { display: flex; flex-direction: column; gap: 24px; }
+.ig-h { display: flex; align-items: center; gap: 14px; font-size: var(--h2-size); }
+.ig-h .ig-icon { color: var(--accent); width: 0.85em; height: 0.85em; }
+.ig-sub { color: var(--muted); font-size: 18px; max-width: 72ch; margin-top: -10px; }
+.ig-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--gap); align-items: start; }
+.ig-note { color: var(--muted); font-size: 15px; }
+.ig-nb { white-space: nowrap; }
+
+/* Tones: any element may carry data-tone, default is tone 1. */
+.ig { --tone: var(--t1); }
+[data-tone="1"] { --tone: var(--t1); }
+[data-tone="2"] { --tone: var(--t2); }
+[data-tone="3"] { --tone: var(--t3); }
+[data-tone="4"] { --tone: var(--t4); }
+[data-tone="5"] { --tone: var(--t5); }
+.ig * { --tone-soft: color-mix(in oklab, var(--tone) var(--soft-pct), var(--bg)); --tone-num: color-mix(in oklab, var(--tone) 82%, var(--ink)); }
+
+.ig-card { background: var(--card); border: var(--card-border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; position: relative; isolation: isolate; }
+.ig-badge { display: inline-block; align-self: flex-start; font-family: var(--font-label); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; padding: 4px 12px; border-radius: 999px; background: var(--tone); color: var(--on-tone, #fff); }
+
+/* ---------- Hero ---------- */
+
+.ig-hero { display: grid; grid-template-columns: 1fr auto; gap: 20px 56px; align-items: end; padding: var(--hero-pad); background: var(--hero-bg); color: var(--hero-ink); border-radius: var(--radius-lg); position: relative; isolation: isolate; overflow: hidden; }
+.ig-kicker { grid-column: 1 / -1; font-family: var(--font-label); font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hero-muted); }
+.ig-hero h1 { font-size: var(--h1-size); max-width: 18ch; }
+.ig-lead { margin-top: 18px; font-size: 20px; max-width: 58ch; color: var(--hero-muted); }
+.ig-hero-figure { text-align: right; }
+.ig-hero-figure b { display: block; font-family: var(--font-num); font-size: var(--hero-num-size); font-weight: var(--num-weight); line-height: 0.9; letter-spacing: -0.03em; color: var(--hero-accent); white-space: nowrap; }
+.ig-hero-figure span { display: block; margin-top: 10px; font-size: 17px; color: var(--hero-muted); }
+
+/* ---------- Stat cards ---------- */
+
+.ig-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--gap); }
+.ig-stat { display: flex; flex-direction: column; gap: 6px; }
+.ig-stat > .ig-icon { width: 44px; height: 44px; padding: 10px; border-radius: var(--icon-radius); background: var(--tone-soft); color: var(--tone-num); }
+.ig-stat > b { white-space: nowrap; font-family: var(--font-num); font-size: var(--stat-num-size); font-weight: var(--num-weight); line-height: 1; letter-spacing: -0.02em; color: var(--tone-num); margin-top: 10px; }
+.ig-stat > span { font-weight: 700; font-size: 18px; }
+.ig-stat > small { color: var(--muted); font-size: 15px; }
+
+/* ---------- Ranges and bars: one row per item, scale shared via --max ---------- */
+
+.ig-ranges { display: flex; flex-direction: column; gap: 14px; }
+.ig-range { display: grid; grid-template-columns: minmax(180px, 280px) 1fr minmax(120px, auto); align-items: center; gap: 0 20px; }
+.ig-range > span { grid-column: 1; grid-row: 1; font-weight: 600; }
+.ig-range > em { grid-column: 3; grid-row: 1; font-style: normal; font-family: var(--font-label); font-weight: 700; font-size: 15px; color: var(--tone-num); white-space: nowrap; }
+.ig-range::before, .ig-range::after { content: ""; grid-column: 2; grid-row: 1; height: 18px; border-radius: 999px; }
+.ig-range::before { background: var(--line); opacity: 0.55; }
+.ig-range::after {
+  background: var(--tone);
+  margin-left: calc(var(--from, 0) / var(--max) * 100%);
+  width: max(18px, calc((var(--to) - var(--from, 0)) / var(--max) * 100%));
+}
+.ig-ranges > .ig-note { margin-top: 4px; }
+
+/* ---------- Donut: share of a whole ---------- */
+
+.ig-donut { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; }
+.ig-donut > i { width: var(--donut-size, 168px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--tone) calc(var(--p) * 1%), var(--tone-soft) 0); position: relative; font-style: normal; }
+.ig-donut > i::before { content: ""; position: absolute; inset: calc(var(--donut-size, 168px) * 0.16); border-radius: 50%; background: var(--bg); }
+.ig-card .ig-donut > i::before { background: var(--card-solid, #fff); }
+.ig-donut > i > b { position: relative; font-family: var(--font-num); font-size: calc(var(--donut-size, 168px) * 0.24); font-weight: var(--num-weight); color: var(--tone-num); }
+.ig-donut > div { display: flex; flex-direction: column; gap: 6px; }
+.ig-donut > div > span { font-weight: 700; font-size: 18px; }
+.ig-donut > div > small { color: var(--muted); font-size: 15px; }
+
+/* ---------- Chain of steps ---------- */
+
+.ig-chain { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 40px; counter-reset: step; }
+.ig-step { counter-increment: step; display: flex; flex-direction: column; gap: 8px; position: relative; }
+.ig-step::before { content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--tone); color: var(--on-tone, #fff); font-family: var(--font-num); font-weight: 800; font-size: 20px; margin-bottom: 6px; }
+.ig-step:not(:last-child)::after { content: ""; position: absolute; top: 14px; right: -28px; width: 12px; height: 12px; border-top: 3px solid var(--line-strong); border-right: 3px solid var(--line-strong); transform: rotate(45deg); }
+.ig-step > .ig-icon { position: absolute; top: 8px; right: 0; width: 26px; height: 26px; color: var(--tone-num); }
+.ig-step > p { color: var(--muted); font-size: 16px; }
+
+/* ---------- Compare columns ---------- */
+
+.ig-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap); align-items: stretch; }
+.ig-col { display: flex; flex-direction: column; gap: 14px; }
+.ig-col.is-pick { outline: 3px solid var(--tone); outline-offset: -3px; }
+.ig-col > p { color: var(--muted); }
+.ig-col li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; }
+.ig-col li::before { content: "•"; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-weight: 800; font-size: 16px; line-height: 1; margin-top: 1px; background: var(--line); color: var(--ink); }
+.ig-col li[data-mark="plus"]::before { content: "+"; background: color-mix(in oklab, var(--good) 18%, var(--bg)); color: var(--good); }
+.ig-col li[data-mark="minus"]::before { content: "−"; background: color-mix(in oklab, var(--bad) 16%, var(--bg)); color: var(--bad); }
+
+/* ---------- Scheme: two groups and the links between them ---------- */
+
+.ig-scheme { display: grid; grid-template-columns: 1fr minmax(170px, 230px) 1fr; gap: var(--gap); align-items: stretch; }
+.ig-group { display: flex; flex-direction: column; gap: 12px; }
+.ig-group > h3 { display: flex; align-items: center; gap: 10px; }
+.ig-group > h3 .ig-icon { color: var(--tone-num); }
+.ig-node { display: grid; grid-template-columns: 36px 1fr; gap: 2px 12px; align-items: center; padding: 12px 14px; border-radius: calc(var(--radius) * 0.6); background: var(--tone-soft); }
+.ig-node > .ig-icon { grid-row: span 2; width: 36px; height: 36px; padding: 7px; border-radius: var(--icon-radius); background: var(--card-solid, #fff); color: var(--tone-num); }
+.ig-node > b { font-size: 16px; }
+.ig-node > small { color: var(--muted); font-size: 14px; }
+.ig-bridge { display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+.ig-link { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; position: relative; padding-bottom: 14px; }
+.ig-link > span { font-weight: 700; font-size: 15px; }
+.ig-link > small { color: var(--muted); font-size: 13px; }
+.ig-link::after { content: ""; position: absolute; left: 0; right: 10px; bottom: 0; border-bottom: 3px solid var(--tone); }
+.ig-link::before { content: ""; position: absolute; right: 2px; bottom: -6px; width: 12px; height: 12px; border-top: 3px solid var(--tone); border-right: 3px solid var(--tone); transform: rotate(45deg); }
+.ig-under { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; }
+.ig-under > .ig-icon { width: 40px; height: 40px; color: var(--tone-num); }
+
+/* ---------- Levers: numbered decisions with an effect ---------- */
+
+.ig-levers { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap); counter-reset: lever; }
+.ig-lever { counter-increment: lever; display: flex; flex-direction: column; gap: 10px; }
+.ig-lever > h3::before { content: counter(lever) ". "; color: var(--tone-num); }
+.ig-delta { font-family: var(--font-num); font-size: 34px; font-weight: var(--num-weight); line-height: 1; color: var(--tone-num); }
+.ig-lever > p { color: var(--muted); font-size: 16px; }
+.ig-lever .ig-donut { --donut-size: 104px; gap: 16px; }
+
+/* ---------- Timeline ---------- */
+
+.ig-timeline { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 20px; position: relative; padding-top: 30px; }
+.ig-timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; border-top: 3px solid var(--line); }
+.ig-timeline > li { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.ig-timeline > li::before { content: ""; position: absolute; top: -28px; left: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--tone); box-shadow: 0 0 0 5px var(--bg); }
+.ig-timeline time { font-family: var(--font-label); font-weight: 700; font-size: 14px; color: var(--tone-num); }
+.ig-timeline span { color: var(--muted); font-size: 15px; }
+
+/* ---------- Callout ---------- */
+
+.ig-callout { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; padding: 20px 24px; border-radius: var(--radius); background: var(--tone-soft); }
+.ig-callout[data-kind="risk"] { --tone: var(--bad); }
+.ig-callout[data-kind="tip"] { --tone: var(--good); }
+.ig-callout > .ig-icon { width: 40px; height: 40px; color: var(--tone-num); }
+
+/* ---------- Numbered list (questions, checklist) ---------- */
+
+.ig-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px var(--gap); counter-reset: item; }
+.ig-list > li { counter-increment: item; display: grid; grid-template-columns: 34px 1fr; gap: 2px 14px; }
+.ig-list > li::before { content: counter(item); grid-row: span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--tone); color: var(--tone-num); font-weight: 800; }
+.ig-list > li > span { color: var(--muted); font-size: 15px; }
+
+/* ---------- Cycle: nodes on a ring, arrows run clockwise (--n on the ring, --i on nodes and arrows) ---------- */
+
+.ig-cycle { position: relative; width: min(100%, 840px); aspect-ratio: 1; margin: 0 auto; --r: 280px; }
+.ig-cycle::before { content: ""; position: absolute; left: 50%; top: 50%; width: calc(var(--r) * 2); height: calc(var(--r) * 2); transform: translate(-50%, -50%); border-radius: 50%; border: 3px dashed var(--line); }
+.ig-cycle-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -64%); width: 280px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
+.ig-cycle-center > b { font-family: var(--font-num); font-size: 64px; font-weight: var(--num-weight); line-height: 1; color: var(--accent); }
+.ig-cycle-center > span { color: var(--muted); font-size: 16px; }
+/* Three classes so a look's ".ig-card { position: relative }" never wins over the ring placement. */
+.ig .ig-cycle > .ig-cycle-node { --a: calc(var(--i) * 360deg / var(--n) - 90deg); position: absolute; left: 50%; top: 50%; width: 270px; transform: translate(-50%, -50%) translate(calc(cos(var(--a)) * var(--r)), calc(sin(var(--a)) * var(--r))); display: flex; flex-direction: column; gap: 6px; }
+.ig-cycle-node > .ig-icon { width: 32px; height: 32px; color: var(--tone-num); }
+.ig-cycle-node > p { color: var(--muted); font-size: 16px; }
+.ig-cycle-arrow { --a: calc((var(--i) + 0.5) * 360deg / var(--n) - 90deg); position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; transform: translate(-50%, -50%) translate(calc(cos(var(--a)) * var(--r)), calc(sin(var(--a)) * var(--r))) rotate(calc(var(--a) + 90deg)); background: var(--accent); clip-path: polygon(0 0, 100% 50%, 0 100%, 28% 50%); }
+
+/* ---------- Decision ladder: question, "yes" to the right, "no" down ---------- */
+
+.ig-decide { display: grid; grid-template-columns: minmax(0, 1.25fr) 132px minmax(0, 1fr); align-items: center; }
+.ig-ask { display: flex; flex-direction: column; gap: 6px; }
+.ig-ask > b { font-size: 19px; }
+.ig-ask > small, .ig-out > small, .ig-final > small { color: var(--muted); font-size: 15px; }
+.ig-out, .ig-final { display: flex; flex-direction: column; gap: 4px; }
+.ig-out > b, .ig-final > b { font-family: var(--font-num); font-size: 34px; font-weight: var(--num-weight); line-height: 1.05; color: var(--tone-num); }
+.ig-yes { position: relative; text-align: center; font-family: var(--font-label); font-weight: 700; font-size: 15px; color: var(--tone-num); padding: 0 16px 12px 10px; }
+.ig-yes::after { content: ""; position: absolute; left: 8px; right: 14px; bottom: 0; border-bottom: 3px solid var(--tone); }
+.ig-yes::before { content: ""; position: absolute; right: 9px; bottom: -6px; width: 12px; height: 12px; border-top: 3px solid var(--tone); border-right: 3px solid var(--tone); transform: rotate(45deg); }
+.ig-no { grid-column: 1; position: relative; height: 66px; display: flex; align-items: center; padding-left: calc(50% + 14px); font-family: var(--font-label); font-weight: 700; font-size: 15px; color: var(--muted); }
+.ig-no::before { content: ""; position: absolute; left: 50%; top: 8px; bottom: 8px; border-left: 3px solid var(--line-strong); }
+.ig-no::after { content: ""; position: absolute; left: calc(50% - 5px); bottom: 8px; width: 11px; height: 11px; border-right: 3px solid var(--line-strong); border-bottom: 3px solid var(--line-strong); transform: rotate(45deg); }
+.ig-no + *, .ig-final { grid-column: 1; }
+
+/* ---------- Pyramid: layers widen downwards, the bottom one is the source (--n levels) ---------- */
+
+.ig-pyramid { display: flex; flex-direction: column; gap: 8px; }
+.ig-pyramid > li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 36px; align-items: center; }
+.ig-pyramid > li:nth-child(1) { --k: 0; }
+.ig-pyramid > li:nth-child(2) { --k: 1; }
+.ig-pyramid > li:nth-child(3) { --k: 2; }
+.ig-pyramid > li:nth-child(4) { --k: 3; }
+.ig-pyramid > li:nth-child(5) { --k: 4; }
+.ig-pyramid > li:nth-child(6) { --k: 5; }
+.ig-pyramid > li > b {
+  --top: calc(9% + var(--k) / var(--n) * 41%);
+  --bot: calc(9% + (var(--k) + 1) / var(--n) * 41%);
+  min-height: 122px; display: grid; place-items: end center; padding-bottom: 18px;
+  background: var(--tone); color: var(--on-tone, #fff);
+  font-family: var(--font-head); font-weight: var(--head-weight); font-size: 26px; text-align: center;
+  clip-path: polygon(calc(50% - var(--top)) 0, calc(50% + var(--top)) 0, calc(50% + var(--bot)) 100%, calc(50% - var(--bot)) 100%);
+}
+.ig-pyramid > li > div { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line); padding-top: 10px; }
+.ig-pyramid > li > div > strong { font-size: 19px; }
+.ig-pyramid > li > div > span { color: var(--muted); font-size: 16px; }
+
+/* ---------- Matrix 2x2 with two labelled axes ---------- */
+
+.ig-matrix { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 14px; }
+.ig-quads { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.ig-quad { display: flex; flex-direction: column; gap: 8px; }
+.ig-quad > p { color: var(--muted); font-size: 16px; }
+.ig-ax { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--font-label); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ig-ax > b { color: var(--ink); }
+.ig-ax-y { grid-column: 1; grid-row: 1; writing-mode: vertical-rl; transform: rotate(180deg); border-left: 2px solid var(--line-strong); padding-left: 10px; }
+.ig-ax-x { grid-column: 2; grid-row: 2; border-top: 2px solid var(--line-strong); padding-top: 8px; }
+.ig-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ig-chip { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 700; background: var(--tone-soft); color: var(--tone-num); border: 1.5px solid color-mix(in oklab, var(--tone) 45%, transparent); }
+
+/* ---------- Graphics: illustrations, feature cards, badges, banner, hub, pictograms ---------- */
+
+/* Illustration classes come from illus.py: f* = shades of the element's tone, g* = second tone (--tb). */
+.ig-illus { display: block; width: 100%; height: 100%; overflow: visible; --ta: var(--tone); --tb: var(--t4); --il-line: color-mix(in oklab, var(--ta) 30%, #1b2230); }
+.ig-illus .f1 { fill: color-mix(in oklab, var(--ta) 28%, #ffffff); }
+.ig-illus .f2 { fill: color-mix(in oklab, var(--ta) 68%, #ffffff); }
+.ig-illus .f3 { fill: color-mix(in oklab, var(--ta) 85%, #1b2230); }
+.ig-illus .g1 { fill: color-mix(in oklab, var(--tb) 28%, #ffffff); }
+.ig-illus .g2 { fill: color-mix(in oklab, var(--tb) 68%, #ffffff); }
+.ig-illus .g3 { fill: color-mix(in oklab, var(--tb) 85%, #1b2230); }
+.ig-illus .o { stroke: var(--il-line); stroke-width: 2; stroke-linejoin: round; }
+.ig-illus .ln { fill: none; stroke: var(--il-line); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.ig-illus .thick { stroke-width: 4; }
+.ig-illus .dash { stroke-dasharray: 5 6; }
+.ig-illus .a { stroke: color-mix(in oklab, var(--tb) 80%, #1b2230); }
+.ig-illus .w { fill: #ffffff; }
+.ig-illus .w-stroke { stroke: #ffffff; stroke-width: 9; }
+.ig-illus .k { fill: #26313f; }
+.ig-illus .led { fill: color-mix(in oklab, var(--tb) 90%, #ffffff); }
+.ig-illus .warn { fill: #f5b400; }
+.ig-illus .smoke { fill: color-mix(in oklab, var(--ta) 12%, #e9edf3); stroke: var(--il-line); stroke-width: 1.5; }
+
+/* Feature card: coloured art panel on the left, text in the middle, an optional badge on the right. */
+.ig-features { display: flex; flex-direction: column; gap: var(--gap); }
+.ig .ig-feature { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0 22px; align-items: center; padding: 0; overflow: hidden; }
+.ig-art { align-self: stretch; min-height: 168px; display: grid; place-items: center; padding: 18px; background: color-mix(in oklab, var(--tone) 22%, var(--card-solid, #ffffff)); }
+.ig-art > .ig-illus { max-height: 150px; }
+.ig-feature-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 0; }
+.ig-feature-body > p { color: var(--muted); font-size: 16px; }
+.ig-feature-badges { display: flex; flex-direction: column; align-items: center; gap: 10px; padding-right: 24px; }
+
+.ig-progress { display: block; height: 12px; border-radius: 999px; background: color-mix(in oklab, var(--tone) 16%, var(--line)); position: relative; overflow: hidden; }
+.ig-progress::after { content: ""; position: absolute; inset: 0 auto 0 0; width: calc(var(--v) * 1%); border-radius: inherit; background: var(--tone); }
+
+/* Calendar badge with a date, counter bubble, stopwatch with a number. */
+.ig-cal { display: grid; place-items: center; min-width: 74px; padding: 20px 10px 8px; border: 3px solid var(--ink); border-radius: 12px; background: var(--card-solid, #ffffff); position: relative; font-family: var(--font-num); font-weight: var(--num-weight); font-size: 22px; line-height: 1; color: var(--ink); }
+.ig-cal::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px; border-radius: 8px 8px 0 0; background: var(--tone); }
+.ig-cal::after { content: ""; position: absolute; top: -8px; left: 16px; right: 16px; height: 14px; background: linear-gradient(var(--ink), var(--ink)) left / 4px 100% no-repeat, linear-gradient(var(--ink), var(--ink)) right / 4px 100% no-repeat; }
+.ig-cal small { display: block; margin-top: 3px; font-size: 13px; font-weight: 600; }
+.ig-count { display: inline-grid; place-items: center; min-width: 52px; height: 42px; padding: 0 10px; border: 2.5px solid var(--ink); border-radius: 12px; background: var(--card-solid, #ffffff); position: relative; font-family: var(--font-num); font-weight: var(--num-weight); font-size: 20px; color: var(--ink); }
+.ig-count::after { content: ""; position: absolute; left: 12px; bottom: -9px; width: 14px; height: 14px; background: inherit; border-right: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); transform: rotate(45deg); }
+.ig-timer { display: grid; place-items: center; align-content: center; width: 116px; height: 116px; margin-top: 16px; flex: none; border-radius: 50%; position: relative; background: radial-gradient(circle, var(--card-solid, #ffffff) 0 58%, transparent 59%), conic-gradient(var(--tone) calc(var(--v, 100) * 1%), color-mix(in oklab, var(--tone) 18%, var(--line)) 0); border: 3px solid var(--ink); }
+.ig-timer::before { content: ""; position: absolute; top: -15px; left: 50%; width: 18px; height: 10px; margin-left: -9px; border-radius: 3px; background: var(--ink); }
+.ig-timer::after { content: ""; position: absolute; top: 6px; right: 2px; width: 12px; height: 8px; border-radius: 3px; background: var(--ink); transform: rotate(45deg); }
+.ig-timer > b { font-family: var(--font-num); font-weight: var(--num-weight); font-size: 24px; line-height: 1; white-space: nowrap; color: var(--tone-num); }
+.ig-timer > small { font-size: 12px; font-weight: 700; color: var(--ink); }
+.ig-badges { display: flex; align-items: center; gap: 14px; }
+.ig-badges > .ig-to { font-size: 22px; color: var(--muted); }
+
+/* Context ribbon with a pointer down to what follows. */
+.ig-banner { position: relative; padding: 18px 44px; background: color-mix(in oklab, var(--accent) 12%, var(--card-solid, #ffffff)); border: 2px solid color-mix(in oklab, var(--accent) 45%, var(--line)); border-radius: 16px; font-size: 18px; clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 0 100%, 16px 50%); }
+
+/* Hub: two columns of cards wired to a picture in the middle. Wrappers carry the wires, so cards keep their own decorations. */
+.ig-hub { display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 0 34px; align-items: stretch; }
+.ig-hub-col { display: flex; flex-direction: column; gap: var(--gap); }
+.ig-hub-col > h3 { font-size: var(--h3-size); margin-bottom: 4px; }
+.ig-hub-item { position: relative; }
+.ig-hub-item::after { content: ""; position: absolute; top: 50%; width: 34px; border-top: 3px solid color-mix(in oklab, var(--tone) 70%, var(--line)); }
+.ig-hub-col:first-child .ig-hub-item::after { right: -34px; }
+.ig-hub-col:last-child .ig-hub-item::after { left: -34px; }
+.ig-hub-center { display: grid; place-items: center; position: relative; }
+.ig-hub-center::before { content: ""; position: absolute; top: 8%; bottom: 8%; left: 50%; border-left: 3px dashed var(--line); }
+.ig-hub-center > .ig-illus { position: relative; max-height: 520px; }
+/* In the narrow hub columns the badges go under the text, not into a third column. */
+.ig .ig-hub .ig-feature { grid-template-columns: 124px minmax(0, 1fr); }
+.ig-hub .ig-art { min-height: 150px; grid-row: span 2; padding: 12px; }
+.ig-hub .ig-feature-body { padding: 18px 18px 0 0; }
+.ig-hub .ig-feature-badges { grid-column: 2; flex-direction: row; justify-content: flex-start; padding: 0 18px 18px 0; }
+.ig-feature-badges > small { color: var(--muted); font-size: 14px; }
+
+/* Pictogram row: N small figures, the first M highlighted. */
+.ig-pict { display: flex; flex-wrap: wrap; gap: 6px; }
+.ig-pict > .ig-icon { width: 30px; height: 30px; color: color-mix(in oklab, var(--muted) 45%, var(--line)); }
+.ig-pict > .ig-icon.is-on { color: var(--tone); stroke-width: 2.4; }
+.ig-pict-legend { display: flex; gap: 22px; flex-wrap: wrap; color: var(--muted); font-size: 15px; }
+.ig-pict-legend b { font-family: var(--font-num); font-size: 28px; color: var(--tone-num); margin-right: 6px; }
+.ig-feature .ig-pict > .ig-icon { width: 17px; height: 17px; }
+.ig-feature .ig-pict { gap: 3px; }
+
+/* Fluent 3D pictures (raster, keep their own colours). */
+.ig-3d { display: block; width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12)); }
+.ig-stat > .ig-3d { width: 64px; height: 64px; }
+.ig-art > .ig-3d { width: 120px; height: 120px; }
+.ig-hero-art { justify-self: end; display: flex; align-items: flex-end; gap: 8px; }
+.ig-hero-art > .ig-3d { width: 110px; height: 110px; }
+
+/* Pictures drawn by the local image model: transparent PNG, sized by the slot they sit in. */
+.ig-gen { display: block; width: 100%; height: 100%; max-height: 220px; object-fit: contain; }
+.ig-art > .ig-gen { max-height: 150px; }
+.ig-hero-art > .ig-gen { width: 280px; max-height: 220px; }
+.ig-hub-center > .ig-gen { position: relative; max-height: 360px; }  /* above the dashed spine */
+
+/* ---------- Mind map: a centre with branches on both sides; build.py adds the script that draws curved links ---------- */
+
+.ig-mindmap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 340px) minmax(0, 1fr); gap: 24px 72px; align-items: center; padding: 48px 0; isolation: isolate; }
+.ig-mm-backdrop { position: absolute; inset: 0 -48px; z-index: -2; overflow: hidden; border-radius: var(--radius-lg); }
+.ig-mm-backdrop > .ig-gen { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+.ig-mm-backdrop::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 34% 48% at center, color-mix(in oklab, var(--bg) 70%, transparent) 0%, color-mix(in oklab, var(--bg) 18%, transparent) 80%, transparent 100%); }
+.ig-mm-links { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: visible; }
+.ig-mm-links path { fill: none; stroke-linecap: round; }
+.ig-mm-col { display: flex; flex-direction: column; gap: 22px; }
+.ig-mm-center { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 20px 22px 26px; background: color-mix(in oklab, var(--card-solid, #ffffff) 90%, transparent); border-radius: 32px; box-shadow: 0 24px 60px rgba(30, 20, 0, 0.14); }
+.ig-mm-center > .ig-gen { max-height: 210px; }
+.ig-mm-center > h2 { font-size: 30px; color: var(--accent); }
+.ig-mm-center > p { color: var(--muted); font-size: 15px; }
+.ig .ig-mm-node { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 2px 14px; padding: 16px 18px 18px; background: color-mix(in oklab, var(--card-solid, #ffffff) 94%, transparent); }
+.ig-mm-node > .ig-gen { grid-row: span 2; width: 78px; height: 78px; max-height: 78px; }
+.ig-mm-tag { align-self: end; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tone-num); }
+.ig-mm-node > h3 { align-self: start; font-size: 21px; }
+.ig-mm-node > ul { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.ig-mm-node li { position: relative; padding-left: 16px; font-size: 15px; line-height: 1.4; }
+.ig-mm-node li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: var(--tone); }
+.ig-mm-node li b { color: var(--tone-num); }
+
+/* ---------- Footer ---------- */
+
+.ig-foot { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- Look overrides ---------- */
+
+html[data-look="strict"] .ig-card { border-top: 2px solid var(--ink); padding: 18px 0 0; }
+html[data-look="strict"] .ig-hero { border-bottom: 2px solid var(--ink); }
+html[data-look="strict"] .ig-hero h1 { max-width: 16ch; }
+html[data-look="strict"] .ig-stat > .ig-icon { padding: 0; width: 30px; height: 30px; background: none; }
+html[data-look="strict"] .ig-range::before { height: 2px; background: var(--ink); opacity: 0.25; }
+html[data-look="strict"] .ig-range::after { border-radius: 0; height: 16px; }
+html[data-look="strict"] .ig-node { background: none; border: 1px solid var(--line); }
+html[data-look="strict"] .ig-node > .ig-icon { background: none; padding: 4px; }
+html[data-look="strict"] .ig-col.is-pick { outline: 0; border-top-color: var(--accent); border-top-width: 6px; }
+html[data-look="strict"] .ig-badge { border-radius: 0; }
+html[data-look="strict"] .ig-callout { background: none; border-left: 6px solid var(--tone); border-radius: 0; padding: 4px 0 4px 20px; }
+html[data-look="strict"] .ig-step::before { border-radius: 0; }
+html[data-look="strict"] .ig-kicker { color: var(--accent); }
+
+html[data-look="bright"] .ig-h .ig-icon { width: 1.25em; height: 1.25em; padding: 0.22em; border-radius: 12px; background: color-mix(in oklab, var(--accent) 12%, #fff); }
+html[data-look="bright"] .ig-hero::after { content: ""; position: absolute; width: 520px; height: 520px; right: -140px; top: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 65%); z-index: -1; }
+html[data-look="bright"] .ig-stat { border-top: 5px solid var(--tone); }
+html[data-look="bright"] .ig-node { border-radius: 14px; }
+html[data-look="bright"] .ig-callout { border-radius: 18px; }
+
+/* Watercolor: washes behind cards, paper grain, pencil lines, hand-drawn borders.
+   The SVG filters #ig-wc (large washes) and #ig-wc-s (bars, dots) are inserted by build.py. */
+html[data-look="watercolor"] body {
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .27  0 0 0 0 .18  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-look="watercolor"] .ig { --card-solid: #fbf7ef; }
+html[data-look="watercolor"] .ig-card::before {
+  content: ""; position: absolute; inset: -10px -14px -12px -8px; z-index: -1;
+  background: radial-gradient(ellipse at 35% 40%, color-mix(in oklab, var(--tone) 46%, transparent) 0%, color-mix(in oklab, var(--tone) 26%, transparent) 55%, transparent 78%);
+  filter: url(#ig-wc); mix-blend-mode: multiply;
+}
+html[data-look="watercolor"] .ig-card { background: rgba(255, 252, 245, 0.35); }
+html[data-look="watercolor"] .ig-hero::before, html[data-look="watercolor"] .ig-hero::after { content: ""; position: absolute; z-index: -1; filter: url(#ig-wc); mix-blend-mode: multiply; border-radius: 50%; }
+html[data-look="watercolor"] .ig-hero::before { width: 62%; height: 120%; left: -6%; top: -10%; background: radial-gradient(ellipse, color-mix(in oklab, var(--t1) 42%, transparent), transparent 70%); }
+html[data-look="watercolor"] .ig-hero::after { width: 40%; height: 130%; right: -4%; top: -20%; background: radial-gradient(ellipse, color-mix(in oklab, var(--t2) 46%, transparent), transparent 68%); }
+html[data-look="watercolor"] .ig-hero h1 { max-width: 20ch; line-height: 0.98; }
+/* Washes must fade out on their own, not be cut by the hero box; the slanted figures need room on the right. */
+html[data-look="watercolor"] .ig-hero { overflow: visible; }
+html[data-look="watercolor"] body { overflow-x: clip; }
+html[data-look="watercolor"] .ig-hero-figure b { padding-right: 0.12em; }
+html[data-look="watercolor"] .ig-kicker { color: var(--accent); letter-spacing: 0.12em; }
+html[data-look="watercolor"] .ig-h .ig-icon { color: var(--ink); stroke-width: 1.6; transform: rotate(-6deg); }
+html[data-look="watercolor"] .ig-icon { stroke-width: 1.7; }
+html[data-look="watercolor"] .ig-stat > .ig-icon { background: none; color: var(--ink); width: 52px; height: 52px; padding: 6px; transform: rotate(-4deg); }
+html[data-look="watercolor"] .ig-stat > b, html[data-look="watercolor"] .ig-delta { line-height: 0.85; letter-spacing: 0; }
+html[data-look="watercolor"] .ig-range::before { height: 0; border-top: 2px dashed var(--line); background: none; opacity: 1; }
+html[data-look="watercolor"] .ig-range::after { height: 22px; filter: url(#ig-wc-s); opacity: 0.8; mix-blend-mode: multiply; }
+html[data-look="watercolor"] .ig-range > em { font-family: var(--font-num); font-size: 26px; }
+html[data-look="watercolor"] .ig-node { background: rgba(255, 252, 245, 0.55); border: 1.5px solid var(--line-strong); border-radius: 14px 4px 16px 6px / 6px 16px 4px 14px; }
+html[data-look="watercolor"] .ig-node > .ig-icon { background: none; color: var(--ink); }
+html[data-look="watercolor"] .ig-link::after { border-bottom: 2.5px solid var(--ink); border-radius: 50%; }
+html[data-look="watercolor"] .ig-link::before { border-color: var(--ink); }
+html[data-look="watercolor"] .ig-step::before { filter: url(#ig-wc-s); background: var(--tone); color: #fff; }
+html[data-look="watercolor"] .ig-col.is-pick { outline: 0; border-width: 3px; border-color: var(--tone); }
+html[data-look="watercolor"] .ig-badge { font-family: var(--font-head); font-size: 22px; letter-spacing: 0; padding: 0 14px; filter: url(#ig-wc-s); }
+html[data-look="watercolor"] .ig-callout { background: none; border: 2px dashed var(--tone); border-radius: 18px 6px 20px 8px / 8px 20px 6px 18px; }
+html[data-look="watercolor"] .ig-donut > i { filter: url(#ig-wc-s); }
+html[data-look="watercolor"] .ig-list > li::before { font-family: var(--font-head); font-size: 22px; border-width: 2px; border-radius: 48% 52% 45% 55% / 55% 45% 52% 48%; }
+html[data-look="watercolor"] .ig-timeline > li::before { filter: url(#ig-wc-s); box-shadow: none; }
+html[data-look="watercolor"] .ig-foot { border-top: 2px dashed var(--line); }
+
+/* Blueprint: drafting grid, white outlines, dashed inner parts, mono figures. */
+html[data-look="blueprint"] body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+html[data-look="blueprint"] .ig-hero { border: 1.5px solid var(--line-strong); }
+html[data-look="blueprint"] .ig-hero::after { content: "ЛИСТ 1"; position: absolute; right: 0; bottom: 0; padding: 4px 12px; border-left: 1.5px solid var(--line-strong); border-top: 1.5px solid var(--line-strong); font: 600 12px var(--font-label); letter-spacing: 0.1em; color: var(--muted); }
+html[data-look="blueprint"] .ig-kicker { color: var(--accent); }
+html[data-look="blueprint"] .ig-h { text-transform: uppercase; letter-spacing: 0.04em; }
+html[data-look="blueprint"] .ig-h .ig-icon { color: var(--accent); }
+html[data-look="blueprint"] .ig-icon { stroke-width: 1.5; }
+html[data-look="blueprint"] .ig-stat > .ig-icon { background: none; border: 1px dashed var(--tone); }
+html[data-look="blueprint"] .ig-node { background: none; border: 1px dashed var(--line); border-radius: 2px; }
+html[data-look="blueprint"] .ig-node > .ig-icon { background: none; border: 1px solid var(--tone); }
+html[data-look="blueprint"] .ig-range::before { height: 0; border-top: 1px solid var(--line); background: none; opacity: 1; }
+html[data-look="blueprint"] .ig-range::after { height: 12px; border-radius: 0; background: repeating-linear-gradient(45deg, var(--tone) 0 3px, transparent 3px 7px); border: 1.5px solid var(--tone); }
+html[data-look="blueprint"] .ig-badge { background: none; border: 1.5px solid var(--tone); color: var(--tone); border-radius: 2px; }
+html[data-look="blueprint"] .ig-col.is-pick { outline-style: dashed; outline-width: 2px; outline-offset: 6px; }
+html[data-look="blueprint"] .ig-callout { background: none; border: 1.5px dashed var(--tone); border-radius: 2px; }
+html[data-look="blueprint"] .ig-list > li::before { border-radius: 2px; }
+html[data-look="blueprint"] .ig-step::before { border-radius: 2px; }
+html[data-look="blueprint"] .ig-delta { font-size: 27px; }
+
+/* Night: dashboard on dark glass, numbers glow in their tone. */
+html[data-look="night"] .ig-stat > b, html[data-look="night"] .ig-delta, html[data-look="night"] .ig-hero-figure b { text-shadow: 0 0 28px color-mix(in oklab, var(--tone) 55%, transparent); }
+html[data-look="night"] .ig-hero-figure b { --tone: var(--hero-accent); }
+html[data-look="night"] .ig-stat { border-top: 3px solid var(--tone); }
+html[data-look="night"] .ig-range::before { opacity: 1; background: var(--line); }
+html[data-look="night"] .ig-range::after { box-shadow: 0 0 18px color-mix(in oklab, var(--tone) 60%, transparent); }
+html[data-look="night"] .ig-h .ig-icon { width: 1.25em; height: 1.25em; padding: 0.22em; border-radius: 12px; background: color-mix(in oklab, var(--accent) 16%, var(--bg)); }
+html[data-look="night"] .ig-node { border: 1px solid color-mix(in oklab, var(--tone) 30%, transparent); }
+html[data-look="night"] .ig-link::after { box-shadow: 0 0 10px color-mix(in oklab, var(--tone) 60%, transparent); }
+html[data-look="night"] .ig-kicker { color: var(--accent); }
+
+/* Editorial: newspaper rules, serif headlines, red flag in the corner. */
+/* Playfair Display defaults to old-style figures ("1С" reads as "ıС"), so force lining ones. */
+html[data-look="editorial"] { font-variant-numeric: lining-nums; }
+html[data-look="editorial"] .ig-hero { border-top: 1px solid var(--ink); border-bottom: 4px double var(--ink); }
+html[data-look="editorial"] .ig-hero::before { content: ""; position: absolute; left: 0; top: 0; width: 64px; height: 10px; background: var(--accent); }
+html[data-look="editorial"] .ig-kicker { color: var(--accent); padding-top: 8px; }
+html[data-look="editorial"] .ig-lead { font-family: var(--font-head); font-style: italic; font-weight: 600; color: var(--ink); }
+html[data-look="editorial"] .ig-card { border-top: 1px solid var(--ink); padding: 16px 0 0; }
+html[data-look="editorial"] .ig-stat > .ig-icon { background: none; padding: 0; width: 28px; height: 28px; }
+html[data-look="editorial"] .ig-h { border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+html[data-look="editorial"] .ig-h .ig-icon { display: none; }
+html[data-look="editorial"] .ig-h::before { content: ""; width: 14px; height: 14px; flex: none; background: var(--accent); }
+html[data-look="editorial"] .ig-range::before { height: 1px; opacity: 1; background: var(--line); }
+html[data-look="editorial"] .ig-range::after { height: 14px; border-radius: 0; }
+html[data-look="editorial"] .ig-node { background: none; border-bottom: 1px solid var(--line); border-radius: 0; padding: 10px 0; }
+html[data-look="editorial"] .ig-node > .ig-icon { background: none; }
+html[data-look="editorial"] .ig-col.is-pick { outline: 0; border-top: 4px solid var(--tone); }
+html[data-look="editorial"] .ig-badge { border-radius: 0; text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
+html[data-look="editorial"] .ig-callout { background: none; border-left: 4px solid var(--tone); border-radius: 0; padding: 4px 0 4px 18px; }
+html[data-look="editorial"] .ig-step::before { border-radius: 0; }
+html[data-look="editorial"] .ig-list > li::before { border: 0; border-radius: 0; font-family: var(--font-head); font-size: 26px; color: var(--accent); }
+
+/* Pop: flat saturated fills, thick outlines, hard offset shadows. */
+html[data-look="pop"] .ig { --tone-num: var(--ink); }
+html[data-look="pop"] .ig * { --tone-num: var(--ink); }
+html[data-look="pop"] .ig-hero { border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+html[data-look="pop"] .ig-hero-figure b { -webkit-text-stroke: 0; text-shadow: 4px 4px 0 #ffffff; }
+html[data-look="pop"] .ig-kicker { color: var(--ink); }
+html[data-look="pop"] .ig-stat { background: var(--tone); }
+html[data-look="pop"] .ig-stat > small { color: var(--ink); }
+html[data-look="pop"] .ig-stat > .ig-icon { background: #ffffff; border: 2.5px solid var(--ink); }
+html[data-look="pop"] .ig-h .ig-icon { width: 1.25em; height: 1.25em; padding: 0.2em; border: 2.5px solid var(--ink); border-radius: 10px; background: var(--t1); color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+html[data-look="pop"] .ig-range::before { height: 22px; background: #ffffff; border: 2.5px solid var(--ink); opacity: 1; }
+html[data-look="pop"] .ig-range::after { height: 22px; border: 2.5px solid var(--ink); }
+html[data-look="pop"] .ig-range > em { color: var(--ink); }
+html[data-look="pop"] .ig-node { border: 2.5px solid var(--ink); border-radius: 10px; }
+html[data-look="pop"] .ig-node > .ig-icon { border: 2px solid var(--ink); }
+html[data-look="pop"] .ig-link::after { border-bottom-width: 4px; border-color: var(--ink); }
+html[data-look="pop"] .ig-link::before { border-color: var(--ink); border-width: 4px; }
+html[data-look="pop"] .ig-col.is-pick { outline: 0; background: var(--tone-soft); }
+html[data-look="pop"] .ig-badge { border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); border-radius: 8px; }
+html[data-look="pop"] .ig-col li::before { border: 2px solid var(--ink); }
+html[data-look="pop"] .ig-delta { display: inline-block; align-self: flex-start; background: var(--tone); border: 2.5px solid var(--ink); border-radius: 10px; padding: 6px 12px; font-size: 26px; }
+html[data-look="pop"] .ig-callout { border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
+html[data-look="pop"] .ig-step::before, html[data-look="pop"] .ig-list > li::before { border: 2.5px solid var(--ink); background: var(--tone); color: var(--ink); }
+html[data-look="pop"] .ig-donut > i { border: 3px solid var(--ink); }
+html[data-look="pop"] .ig-donut > i::before { border: 3px solid var(--ink); }
+html[data-look="pop"] .ig-donut > i > b { font-size: calc(var(--donut-size, 168px) * 0.17); }
+
+/* Steampunk: parchment plates in brass frames with rivets, copper pipes, gears behind the title. */
+html[data-look="steampunk"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at 50% 35%, transparent 55%, rgba(90, 55, 20, 0.28) 100%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .27  0 0 0 0 .12  0 0 0 .11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-look="steampunk"] .ig {
+  --rivet: #f1d590 0 2.5px, #6e4c1e 3px 4px, transparent 4.5px;
+  --rivets: radial-gradient(circle at 12px 12px, var(--rivet)), radial-gradient(circle at calc(100% - 12px) 12px, var(--rivet)), radial-gradient(circle at 12px calc(100% - 12px), var(--rivet)), radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), var(--rivet));
+  --brass: radial-gradient(circle at 35% 32%, #f8e2a0, #c8923a 55%, #6e4c1e);
+}
+html[data-look="steampunk"] .ig-card { background-color: var(--card); background-image: var(--rivets); box-shadow: inset 0 0 0 2px #ecd49a, inset 0 0 26px rgba(120, 80, 30, 0.22), var(--shadow); }
+html[data-look="steampunk"] .ig-hero { background: var(--rivets), var(--hero-bg); border: 4px solid #b8863b; box-shadow: inset 0 0 0 2px #5a3d14, inset 0 0 70px rgba(0, 0, 0, 0.5), 0 4px 0 #3a250f, 0 14px 30px rgba(40, 20, 5, 0.35); }
+html[data-look="steampunk"] .ig-hero::after, html[data-look="steampunk"] .ig-hero::before { content: ""; position: absolute; z-index: -1; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%23d9a94e'><circle cx='50' cy='50' r='38' stroke-width='12' stroke-dasharray='9.95 9.95'/><circle cx='50' cy='50' r='30' stroke-width='5'/><circle cx='50' cy='50' r='9' stroke-width='5'/><path d='M50 21v58M21 50h58M29.5 29.5l41 41M70.5 29.5l-41 41' stroke-width='3.5'/></g></svg>") center / contain no-repeat; opacity: 0.22; }
+html[data-look="steampunk"] .ig-hero::after { width: 300px; height: 300px; right: -70px; top: -90px; }
+html[data-look="steampunk"] .ig-hero::before { width: 170px; height: 170px; right: 196px; top: 120px; transform: rotate(14deg); }
+html[data-look="steampunk"] .ig-hero-figure b { background: linear-gradient(180deg, #fff0b8 0%, #e6b85c 42%, #9a6a24 58%, #f3d07e 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+html[data-look="steampunk"] .ig-kicker { color: var(--hero-accent); letter-spacing: 0.16em; }
+html[data-look="steampunk"] .ig-lead { font-style: italic; }
+html[data-look="steampunk"] .ig-h::after { content: ""; flex: 1; height: 7px; margin-left: 8px; border-radius: 4px; background: linear-gradient(180deg, #f3d48a, #b8863b 50%, #6e4c1e); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
+html[data-look="steampunk"] .ig-h .ig-icon { color: var(--accent); }
+html[data-look="steampunk"] .ig-stat > .ig-icon, html[data-look="steampunk"] .ig-node > .ig-icon { background: var(--brass); color: #2b1b10; border: 1.5px solid #4a3012; border-radius: 50%; }
+html[data-look="steampunk"] .ig-range::before { height: 6px; background: #5a3d14; opacity: 0.35; }
+html[data-look="steampunk"] .ig-range::after { height: 16px; border: 1.5px solid #4a3012; background: linear-gradient(180deg, color-mix(in oklab, var(--tone) 35%, #fff6d8), var(--tone) 45%, color-mix(in oklab, var(--tone) 55%, #1a0f05)); }
+html[data-look="steampunk"] .ig-node { background: rgba(255, 248, 230, 0.65); border: 1.5px solid var(--line); border-radius: 6px; }
+html[data-look="steampunk"] .ig-link::after { border-bottom: 0; height: 8px; bottom: -1px; border-radius: 4px; background: linear-gradient(180deg, #f0b98a, #b5562a 50%, #6b2c12); }
+html[data-look="steampunk"] .ig-link::before { border-color: #8a3a18; border-width: 4px; }
+html[data-look="steampunk"] .ig-badge { background: linear-gradient(180deg, #f6dc8f, #c8923a 50%, #8a5a1c); color: #2b1b10; border: 1.5px solid #4a3012; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.14em; box-shadow: inset 0 1px 0 #fff3c4; }
+html[data-look="steampunk"] .ig-col.is-pick { outline: 0; border-color: var(--tone); border-width: 4px; }
+html[data-look="steampunk"] .ig-step::before, html[data-look="steampunk"] .ig-list > li::before { background: var(--brass); color: #2b1b10; border: 1.5px solid #4a3012; }
+html[data-look="steampunk"] .ig-callout { background-color: var(--card); background-image: var(--rivets); border: 3px solid var(--tone); border-radius: 8px; padding: 22px 28px; }
+html[data-look="steampunk"] .ig-donut > i { border: 3px solid #6b4a22; }
+html[data-look="steampunk"] .ig-foot { border-top: 2px solid var(--line); }
+
+/* Fantasy: old map on parchment, scalloped corners, dashed routes, Roman numerals, a wax seal. */
+html[data-look="fantasy"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at 50% 40%, transparent 48%, rgba(110, 65, 25, 0.34) 100%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .27  0 0 0 0 .12  0 0 0 .11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-look="fantasy"] .ig { --corners: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='rotate(0 12 12)' fill='none' stroke='%235a3d1e'><path d='M2 23V9a7 7 0 0 1 7-7h14' stroke-width='1.6'/><path d='M6 23V12a6 6 0 0 1 6-6h11' stroke-width='.8'/><circle cx='5.5' cy='5.5' r='2' fill='%238b1e1e' stroke='none'/></g></svg>") top 5px left 5px / 22px no-repeat, url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='rotate(90 12 12)' fill='none' stroke='%235a3d1e'><path d='M2 23V9a7 7 0 0 1 7-7h14' stroke-width='1.6'/><path d='M6 23V12a6 6 0 0 1 6-6h11' stroke-width='.8'/><circle cx='5.5' cy='5.5' r='2' fill='%238b1e1e' stroke='none'/></g></svg>") top 5px right 5px / 22px no-repeat, url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='rotate(270 12 12)' fill='none' stroke='%235a3d1e'><path d='M2 23V9a7 7 0 0 1 7-7h14' stroke-width='1.6'/><path d='M6 23V12a6 6 0 0 1 6-6h11' stroke-width='.8'/><circle cx='5.5' cy='5.5' r='2' fill='%238b1e1e' stroke='none'/></g></svg>") bottom 5px left 5px / 22px no-repeat, url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='rotate(180 12 12)' fill='none' stroke='%235a3d1e'><path d='M2 23V9a7 7 0 0 1 7-7h14' stroke-width='1.6'/><path d='M6 23V12a6 6 0 0 1 6-6h11' stroke-width='.8'/><circle cx='5.5' cy='5.5' r='2' fill='%238b1e1e' stroke='none'/></g></svg>") bottom 5px right 5px / 22px no-repeat; }
+html[data-look="fantasy"] .ig-card { background: var(--corners), var(--card); padding: 30px; }
+html[data-look="fantasy"] .ig-hero { border-bottom: 3px double var(--line-strong); }
+html[data-look="fantasy"] .ig-hero::after { content: ""; position: absolute; z-index: -1; width: 330px; height: 330px; right: 40px; top: -40px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%235a3d1e' stroke-width='.8'><circle cx='50' cy='50' r='46'/><circle cx='50' cy='50' r='40'/><circle cx='50' cy='50' r='12'/></g><g fill='%235a3d1e'><path d='M50 4 56 44 50 50 44 44Z'/><path d='M96 50 56 56 50 50 56 44Z' opacity='.6'/><path d='M50 96 44 56 50 50 56 56Z' opacity='.6'/><path d='M4 50 44 44 50 50 44 56Z' opacity='.6'/></g><path d='M50 4 56 44 50 50Z' fill='%238b1e1e'/></svg>") center / contain no-repeat; opacity: 0.16; }
+html[data-look="fantasy"] .ig-hero-figure b { font-family: var(--font-head); font-weight: 400; color: var(--accent); }
+html[data-look="fantasy"] .ig-kicker { text-transform: none; font-variant: small-caps; font-size: 18px; letter-spacing: 0.08em; color: var(--accent); }
+html[data-look="fantasy"] .ig-lead { font-style: italic; font-size: 21px; }
+html[data-look="fantasy"] .ig-h::after { content: ""; flex: 1; height: 2px; margin-left: 8px; background: linear-gradient(90deg, var(--line-strong), transparent); }
+html[data-look="fantasy"] .ig-h .ig-icon { color: var(--accent); }
+html[data-look="fantasy"] .ig-icon { stroke-width: 1.6; }
+html[data-look="fantasy"] .ig-stat > .ig-icon { background: none; color: var(--ink); width: 48px; height: 48px; padding: 4px; }
+html[data-look="fantasy"] .ig-range::before { height: 0; border-top: 2px dotted var(--line); background: none; opacity: 1; }
+html[data-look="fantasy"] .ig-range::after { height: 16px; border-radius: 0; clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 50%, 100% 100%, 0 100%, 7px 50%); }
+html[data-look="fantasy"] .ig-node { background: rgba(255, 248, 230, 0.55); border: 1px solid var(--line); border-radius: 2px; }
+html[data-look="fantasy"] .ig-node > .ig-icon { background: none; color: var(--ink); }
+html[data-look="fantasy"] .ig-link::after { border-bottom: 3px dashed var(--tone); }
+html[data-look="fantasy"] .ig-link::before { border-color: var(--ink); }
+html[data-look="fantasy"] .ig-col.is-pick { outline: 0; border-color: var(--tone); }
+html[data-look="fantasy"] .ig-col .ig-badge { position: absolute; top: -26px; right: -18px; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; padding: 0; background: radial-gradient(circle at 38% 34%, #c74343, #8b1e1e 55%, #5a0f0f); color: #f6e3c0; font-family: var(--font-head); font-weight: 400; font-size: 11px; letter-spacing: 0.02em; transform: rotate(-12deg); box-shadow: 0 0 0 5px rgba(139, 30, 30, 0.32), 0 4px 8px rgba(60, 10, 10, 0.4); }
+html[data-look="fantasy"] .ig-step { counter-increment: step; }
+html[data-look="fantasy"] .ig-step::before { content: counter(step, upper-roman); border-radius: 0; background: none; color: var(--accent); font-family: var(--font-head); width: auto; }
+html[data-look="fantasy"] .ig-lever > h3::before { content: counter(lever, upper-roman) ". "; color: var(--accent); }
+html[data-look="fantasy"] .ig-list > li { grid-template-columns: 46px 1fr; }
+html[data-look="fantasy"] .ig-list > li::before { content: counter(item, upper-roman); border: 0; width: 46px; font-family: var(--font-head); font-weight: 400; font-size: 22px; color: var(--accent); }
+html[data-look="fantasy"] .ig-callout { background: var(--corners), rgba(255, 249, 232, 0.55); border: 3px double var(--tone); border-radius: 4px; padding: 24px 30px; }
+html[data-look="fantasy"] .ig-donut > i { border: 2px solid var(--ink); }
+html[data-look="fantasy"] .ig-foot { border-top: 3px double var(--line); text-align: center; font-style: italic; }
+
+/* Sketch: careful ink drawing on dotted paper. Frames are four lines that run past the corners,
+   shadows are hatching, accents are coloured pencil; #ig-sk gives every drawn line a slight tremor. */
+html[data-look="sketch"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(40, 40, 40, 0.14) 1px, transparent 1.3px), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .2  0 0 0 .05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 26px 26px, 320px 320px;
+}
+html[data-look="sketch"] .ig-card, html[data-look="sketch"] .ig-node, html[data-look="sketch"] .ig-callout { position: relative; }
+/* No own stacking context: the hatched shadow (z-index -1) must go under the card's paper, not over it. */
+html[data-look="sketch"] .ig-card { --o: 10px; isolation: auto; }
+html[data-look="sketch"] .ig-node { --o: 5px; background: var(--card); border-radius: 0; }
+html[data-look="sketch"] .ig-callout { --o: 8px; background: var(--card); border-radius: 0; }
+html[data-look="sketch"] .ig-card::after, html[data-look="sketch"] .ig-node::after, html[data-look="sketch"] .ig-callout::after {
+  content: ""; position: absolute; inset: calc(var(--o) * -1); pointer-events: none; z-index: 1;
+  background:
+    linear-gradient(var(--ink), var(--ink)) left 0 top var(--o) / 100% 1.6px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left 0 bottom var(--o) / 100% 1.6px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left var(--o) top 0 / 1.6px 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right var(--o) top 0 / 1.6px 100% no-repeat;
+  filter: url(#ig-sk); opacity: 0.88;
+}
+html[data-look="sketch"] .ig-card::before {
+  content: ""; position: absolute; inset: 9px -9px -9px 9px; z-index: -1;
+  background: repeating-linear-gradient(-45deg, rgba(38, 38, 38, 0.45) 0 1px, transparent 1px 6px);
+  filter: url(#ig-sk);
+}
+html[data-look="sketch"] .ig-col.is-pick { outline: 0; }
+html[data-look="sketch"] .ig-col.is-pick::before { background: repeating-linear-gradient(-45deg, color-mix(in oklab, var(--tone) 85%, transparent) 0 1.4px, transparent 1.4px 5px); }
+html[data-look="sketch"] .ig-hero h1 { padding-bottom: 16px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'><path d='M3 8 C 60 3, 120 10, 180 6 S 270 4, 297 7' fill='none' stroke='%23b5452f' stroke-width='2.2' stroke-linecap='round'/><path d='M12 10 C 90 6, 170 11, 286 8' fill='none' stroke='%23b5452f' stroke-width='1' stroke-linecap='round' opacity='.6'/></svg>") left bottom / 70% 14px no-repeat; }
+html[data-look="sketch"] .ig-hero-figure b { position: relative; padding: 0 0.12em; }
+html[data-look="sketch"] .ig-hero-figure b::after { content: ""; position: absolute; inset: -6px -26px -2px -26px; border: 2.2px solid var(--accent); border-radius: 50%; transform: rotate(-5deg); filter: url(#ig-sk); }
+html[data-look="sketch"] .ig-kicker { color: var(--accent); letter-spacing: 0.06em; }
+html[data-look="sketch"] .ig-h { padding-bottom: 10px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'><path d='M3 8 C 60 3, 120 10, 180 6 S 270 4, 297 7' fill='none' stroke='%23b5452f' stroke-width='2.2' stroke-linecap='round'/><path d='M12 10 C 90 6, 170 11, 286 8' fill='none' stroke='%23b5452f' stroke-width='1' stroke-linecap='round' opacity='.6'/></svg>") left bottom / min(420px, 80%) 10px no-repeat; }
+html[data-look="sketch"] .ig-h .ig-icon { color: var(--ink); }
+html[data-look="sketch"] .ig-icon { stroke-width: 1.5; }
+html[data-look="sketch"] .ig-stat > .ig-icon { background: none; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%; }
+html[data-look="sketch"] .ig-node > .ig-icon { background: none; color: var(--tone-num); }
+html[data-look="sketch"] .ig-range::before { height: 0; border-top: 1.5px dashed var(--line); background: none; opacity: 1; }
+html[data-look="sketch"] .ig-range::after { height: 16px; border-radius: 1px; border: 1.5px solid var(--ink); background: repeating-linear-gradient(-45deg, var(--tone) 0 1.6px, transparent 1.6px 5px); filter: url(#ig-sk); }
+html[data-look="sketch"] .ig-range > em { font-family: var(--font-num); font-size: 24px; font-weight: 400; }
+html[data-look="sketch"] .ig-link::after { border-bottom: 1.8px solid var(--ink); filter: url(#ig-sk); }
+html[data-look="sketch"] .ig-link::before { border-color: var(--ink); border-width: 1.8px; filter: url(#ig-sk); }
+html[data-look="sketch"] .ig-badge { background: none; color: var(--accent); border: 2px solid var(--accent); border-radius: 50%; padding: 4px 18px; font-family: var(--font-head); font-size: 20px; font-weight: 400; letter-spacing: 0; transform: rotate(-6deg); }
+html[data-look="sketch"] .ig-col li::before { background: none; border: 1.4px solid currentColor; }
+html[data-look="sketch"] .ig-step::before, html[data-look="sketch"] .ig-list > li::before { background: none; color: var(--tone-num); border: 1.6px solid var(--ink); border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%; font-family: var(--font-num); font-weight: 400; font-size: 20px; }
+html[data-look="sketch"] .ig-callout > .ig-icon { color: var(--tone-num); }
+html[data-look="sketch"] .ig-donut > i { background: conic-gradient(var(--tone) calc(var(--p) * 1%), transparent 0); border: 1.6px solid var(--ink); }
+html[data-look="sketch"] .ig-donut > i::before { border: 1.6px solid var(--ink); }
+html[data-look="sketch"] .ig-delta { font-weight: 400; }
+html[data-look="sketch"] .ig-foot { border-top: 1.5px dashed var(--line); }
+
+/* New parts under looks that need it. */
+html[data-look="strict"] .ig-chip, html[data-look="editorial"] .ig-chip, html[data-look="blueprint"] .ig-chip { border-radius: 0; }
+html[data-look="pop"] .ig-chip { background: var(--tone); color: var(--ink); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+html[data-look="pop"] .ig-pyramid > li > b, html[data-look="pop"] .ig-cycle-arrow { color: var(--ink); }
+html[data-look="sketch"] .ig-chip { background: none; border: 1.5px solid var(--ink); border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%; color: var(--tone-num); font-family: var(--font-head); font-size: 17px; font-weight: 400; }
+html[data-look="sketch"] .ig-cycle::before { border: 1.8px solid var(--ink); filter: url(#ig-sk); }
+html[data-look="sketch"] .ig-cycle-arrow { background: var(--accent); filter: url(#ig-sk); }
+/* A node on the ring is transformed, so it is its own stacking context and the hatched shadow would cover it. */
+html[data-look="sketch"] .ig-cycle-node::before { display: none; }
+/* The pencil oval around the hero figure must not be cut by the hero box. */
+html[data-look="sketch"] .ig-hero { overflow: visible; }
+html[data-look="sketch"] body { overflow-x: clip; }
+html[data-look="sketch"] .ig-pyramid > li > b { background: repeating-linear-gradient(-45deg, var(--tone) 0 2px, transparent 2px 6px); color: var(--ink); text-shadow: 0 0 4px var(--bg), 0 0 8px var(--bg); }
+html[data-look="sketch"] .ig-yes::after, html[data-look="sketch"] .ig-no::before { filter: url(#ig-sk); }
+html[data-look="blueprint"] .ig-cycle::before { border-style: solid; border-width: 1.5px; border-color: var(--line-strong); }
+html[data-look="blueprint"] .ig-pyramid > li > b { background: repeating-linear-gradient(45deg, var(--tone) 0 3px, transparent 3px 8px); color: var(--ink); }
+html[data-look="night"] .ig-cycle-arrow { filter: drop-shadow(0 0 6px var(--accent)); }
+html[data-look="steampunk"] .ig-cycle::before { border: 8px solid #b8863b; box-shadow: inset 0 0 0 2px #6e4c1e, 0 0 0 2px #6e4c1e; }
+html[data-look="fantasy"] .ig-cycle::before { border: 3px dashed var(--line-strong); }
+html[data-look="watercolor"] .ig-pyramid > li > b { filter: url(#ig-wc-s); opacity: 0.9; }
+
+/* Graphics under looks that need it. */
+html[data-look="night"] .ig-illus, html[data-look="blueprint"] .ig-illus { --il-line: #0b1020; }
+html[data-look="night"] .ig-cal, html[data-look="night"] .ig-count, html[data-look="night"] .ig-timer, html[data-look="blueprint"] .ig-cal, html[data-look="blueprint"] .ig-count, html[data-look="blueprint"] .ig-timer { border-color: var(--line-strong); }
+html[data-look="night"] .ig-cal::after, html[data-look="night"] .ig-timer::before, html[data-look="night"] .ig-timer::after { background: var(--line-strong); }
+html[data-look="pop"] .ig-art { background: var(--tone); border-right: 3px solid var(--ink); }
+html[data-look="sketch"] .ig-illus .o, html[data-look="sketch"] .ig-illus .ln { stroke: var(--ink); }
+html[data-look="sketch"] .ig-illus { filter: url(#ig-sk); }
+html[data-look="watercolor"] .ig-art { background: none; }
+html[data-look="strict"] .ig-art, html[data-look="editorial"] .ig-art { background: color-mix(in oklab, var(--tone) 10%, #ffffff); }
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 760px) {
+  .ig { padding: 28px 16px 24px; gap: 48px; }
+  /* Same specificity as the look blocks, so these later rules win. */
+  html[data-look] { --h1-size: 38px; --h2-size: 26px; --hero-num-size: 72px; --stat-num-size: 40px; }
+  html[data-look="watercolor"] { --h1-size: 52px; --h2-size: 36px; --hero-num-size: 88px; --stat-num-size: 54px; }
+  html[data-look="pop"] { --h1-size: 30px; --h2-size: 22px; --hero-num-size: 60px; --stat-num-size: 34px; }
+  html[data-look="night"] .ig-hero, html[data-look="pop"] .ig-hero, html[data-look="steampunk"] .ig-hero { padding: 32px 24px; }
+  html[data-look="sketch"] { --h1-size: 46px; --h2-size: 30px; --hero-num-size: 84px; --stat-num-size: 48px; }
+  html[data-look="fantasy"] { --h1-size: 34px; --h2-size: 24px; }
+  html[data-look="steampunk"] .ig-hero::before { display: none; }
+  html[data-look="fantasy"] .ig-col .ig-badge { right: 6px; }
+  .ig-hero { grid-template-columns: 1fr; }
+  html[data-look="bright"] .ig-hero { padding: 32px 24px; }
+  .ig-hero-figure { text-align: left; }
+  .ig-chain, .ig-timeline { grid-auto-flow: row; }
+  .ig-step:not(:last-child)::after { top: auto; bottom: -24px; right: auto; left: 14px; transform: rotate(135deg); }
+  .ig-scheme { grid-template-columns: 1fr; }
+  .ig-range { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .ig-range::before, .ig-range::after { grid-column: 1 / -1; grid-row: 2; }
+  .ig-range > em { grid-column: 2; }
+  .ig-row, .ig-compare, .ig-levers, .ig-list { grid-template-columns: 1fr; }
+  .ig-cycle { aspect-ratio: auto; display: flex; flex-direction: column; gap: 28px; }
+  .ig-cycle::before, .ig-cycle-arrow { display: none; }
+  .ig-cycle-center, .ig .ig-cycle > .ig-cycle-node { position: relative; left: auto; top: auto; transform: none; width: auto; }
+  .ig-decide { grid-template-columns: 1fr; }
+  .ig-yes { text-align: left; padding: 10px 0 14px 22px; }
+  .ig-yes::after { left: 6px; right: auto; top: 6px; bottom: 6px; border-bottom: 0; border-left: 3px solid var(--tone); }
+  .ig-yes::before { right: auto; left: 1.5px; bottom: 4px; transform: rotate(135deg); }
+  .ig-pyramid > li { grid-template-columns: 1fr; gap: 10px; }
+  .ig-matrix { grid-template-columns: 1fr; }
+  .ig-ax-y { display: none; }
+  .ig-ax-x { grid-column: 1; }
+  .ig-quads { grid-template-columns: 1fr; }
+  .ig .ig-feature, .ig .ig-hub .ig-feature { grid-template-columns: 1fr; }
+  /* One column on phones: the art panel is a full-width strip on top, text and badges padded under it. */
+  .ig-art, .ig-hub .ig-art { grid-row: auto; min-height: 140px; }
+  .ig-feature-body, .ig-hub .ig-feature-body { padding: 0 20px 20px; }
+  .ig-feature-badges, .ig-hub .ig-feature-badges { grid-column: auto; flex-direction: row; padding: 0 20px 20px; }
+  .ig-hub { grid-template-columns: 1fr; gap: var(--gap); }
+  .ig-hub-item::after, .ig-hub-center::before { display: none; }
+  .ig-hub-center > .ig-illus { max-height: 220px; }
+  .ig-banner { padding: 16px 28px; }
+  .ig-mindmap { grid-template-columns: 1fr; gap: 20px; padding: 24px 0; }
+  .ig-mm-center { order: -1; }
+  .ig-mm-links { display: none; }
+  .ig-mm-backdrop { inset: 0 -16px; }
+}
+
+/* ---------- Print ---------- */
+
+@page { margin: 12mm; }
+@media print {
+  .ig { padding: 0; gap: 40px; }
+  .ig-section, .ig-card, .ig-hero { break-inside: avoid; }
+  .ig-switch { display: none; }
+}
+
+/* Look switcher, present only in builds made with --all-looks. */
+.ig-switch { position: fixed; right: 16px; bottom: 16px; max-width: calc(100vw - 32px); display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; padding: 6px; border-radius: 22px; background: rgba(20, 20, 20, 0.85); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); z-index: 10; font: 600 14px system-ui, sans-serif; }
+.ig-switch button { all: unset; cursor: pointer; padding: 6px 14px; border-radius: 999px; color: #fff; }
+.ig-switch button[aria-pressed="true"] { background: #fff; color: #111; }
+
+html[data-look="pop"] .ig-art .ig-illus { --ta: #ffffff; --tb: #9b9b9b; --il-line: #3c3c3c; }

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+# built pages: build them from the *.src.html sources
+examples/*.html
+!examples/*.src.html
