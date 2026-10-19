@@ -45,6 +45,10 @@ PALETTES = {
     "pop": "saturated yellow, pink and teal colours with black outlines",
     "watercolor": "soft watercolour pastel colours",
     "strict": "black, white and one orange accent",
+    "editorial": "charcoal, warm cream and one deep red accent",
+    "sketch": "pencil grey on off-white with one blue accent",
+    "steampunk": "brass, copper and dark brown colours",
+    "fantasy": "parchment, gold and deep green colours",
 }
 DEFAULT_PALETTE = "soft pastel colours"
 # Few-step distilled models (mflux 0.22): command and number of steps each one needs.

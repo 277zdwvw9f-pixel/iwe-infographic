@@ -184,6 +184,12 @@ class GenImageTest(unittest.TestCase):
         self.assertIn("cyan and violet", prompt)
         self.assertIn("no text, no letters", prompt)
 
+    def test_every_builtin_look_has_its_own_palette(self):
+        looks = ["strict", "bright", "editorial", "blueprint", "night", "watercolor", "sketch", "pop", "steampunk", "fantasy"]
+        palettes = [gen_image.palette_for(look) for look in looks]
+        self.assertEqual(len(set(palettes)), len(looks))
+        self.assertNotIn(gen_image.DEFAULT_PALETTE, palettes)
+
     def test_batch_bad_name(self):
         with tempfile.TemporaryDirectory() as tmp:
             table = Path(tmp) / "prompts.tsv"
