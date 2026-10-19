@@ -184,6 +184,38 @@ class GenImageTest(unittest.TestCase):
         self.assertIn("cyan and violet", prompt)
         self.assertIn("no text, no letters", prompt)
 
+    def test_openrouter_request_and_saved_picture(self):
+        import base64
+        import io
+        import json
+        from unittest import mock
+
+        sent = {}
+
+        def fake_urlopen(req, timeout=0):
+            sent["url"], sent["body"] = req.full_url, json.loads(req.data)
+            sent["auth"] = req.get_header("Authorization")
+            answer = {"data": [{"b64_json": base64.b64encode(b"png-bytes").decode()}], "usage": {"cost": 0.014}}
+            return io.BytesIO(json.dumps(answer).encode())
+
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"OPENROUTER_API_KEY": "k"}), \
+                mock.patch.object(gen_image.urllib.request, "urlopen", fake_urlopen):
+            out = Path(tmp) / "bg.png"
+            cost = gen_image.generate_remote("a plant", out, 1536, 864, 11, "openrouter-flux2-klein-4b")
+            self.assertEqual(out.read_bytes(), b"png-bytes")
+        self.assertEqual(cost, "0.014 $")
+        self.assertEqual(sent["url"], gen_image.OPENROUTER_URL)
+        self.assertEqual(sent["body"]["model"], "black-forest-labs/flux.2-klein-4b")
+        self.assertEqual(sent["body"]["aspect_ratio"], "16:9")
+        self.assertEqual(sent["auth"], "Bearer k")
+
+    def test_openrouter_needs_key(self):
+        from unittest import mock
+
+        with mock.patch.dict(os.environ, {}, clear=True), tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(SystemExit, "OPENROUTER_API_KEY"):
+                gen_image.generate_remote("a plant", Path(tmp) / "x.png", 768, 768, 1, "openrouter-flux2-klein-4b")
+
     def test_every_builtin_look_has_its_own_palette(self):
         looks = ["strict", "bright", "editorial", "blueprint", "night", "watercolor", "sketch", "pop", "steampunk", "fantasy"]
         palettes = [gen_image.palette_for(look) for look in looks]

@@ -5,24 +5,30 @@ Runs under the python of the image-generation environment, which has mflux and P
 
     ~/.local/share/iwe-imagegen/venv/bin/python gen_image.py "two server racks linked by a cable" \
         -o art/servers.png [--look bright] [--style iso|flat|character|scene|backdrop] [--size 768] [--seed 7]
-        [--model flux2-klein-4b|z-image-turbo]
+        [--model flux2-klein-4b|z-image-turbo|openrouter-flux2-klein-4b]
     ... gen_image.py --batch prompts.tsv -o "art-{look}" --look bright,night   # a whole table, per palette
 
 The prompt says WHAT to draw; --style and --look add HOW (render, palette). The picture never
 carries text: the page sets all text itself, so Cyrillic stays exact and numbers stay editable.
 The white background is cut away by a flood fill from the edges (white parts inside the object
-stay), then the picture is trimmed to its content. Nothing leaves the machine.
+stay), then the picture is trimmed to its content. Local models: nothing leaves the machine.
+--model openrouter-*: the prompt (a generic description plus palette words, never text from the
+material) goes to OpenRouter, key in OPENROUTER_API_KEY; for urgent pictures in the daytime.
 see docs/service-clause.md
 """
 
 from __future__ import annotations
 
 import argparse
+import base64
+import json
+import math
 import os
 import subprocess
 import sys
 import tempfile
 import time
+import urllib.request
 from collections import deque
 from pathlib import Path
 
@@ -56,6 +62,11 @@ MODELS = {
     "flux2-klein-4b": ("mflux-generate-flux2", 4),  # FLUX.2 Klein 4B, Apache-2.0, not gated
     "z-image-turbo": ("mflux-generate-z-image-turbo", 8),  # Z-Image Turbo 6B
 }
+# Online models via OpenRouter: our name -> OpenRouter model slug (same weights as the local default).
+REMOTE = {
+    "openrouter-flux2-klein-4b": "black-forest-labs/flux.2-klein-4b",
+}
+OPENROUTER_URL = "https://openrouter.ai/api/v1/images"
 QUANTIZE = os.environ.get("IG_IMAGEGEN_QUANTIZE", "4")
 # Pre-quantized copies made once with `mflux-save --quantize 4`: they load small, while quantizing
 # a full model at every start first loads it whole and pushes a 24 GB Mac into swap.
@@ -77,7 +88,40 @@ def prompt_for(what: str, style: str, look: str | None) -> str:
     return STYLES[style].format(what=what, palette=palette) + NO_TEXT
 
 
+def aspect_ratio(width: int, height: int) -> str:
+    g = math.gcd(width, height)
+    return f"{width // g}:{height // g}"
+
+
+def generate_remote(prompt: str, out: Path, width: int, height: int, seed: int, model: str) -> str:
+    """Draw through OpenRouter's image API; returns what the call cost, if the answer says."""
+    key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        raise SystemExit("нет ключа OpenRouter: задайте переменную окружения OPENROUTER_API_KEY")
+    body = {"model": REMOTE[model], "prompt": prompt, "aspect_ratio": aspect_ratio(width, height), "seed": seed}
+    req = urllib.request.Request(OPENROUTER_URL, data=json.dumps(body).encode("utf-8"),
+                                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=180) as resp:
+        answer = json.load(resp)
+    try:
+        item = answer["data"][0]
+    except (KeyError, IndexError, TypeError):
+        raise SystemExit(f"OpenRouter не вернул картинку: {str(answer)[:400]}") from None
+    if item.get("b64_json"):
+        out.write_bytes(base64.b64decode(item["b64_json"]))
+    elif item.get("url"):
+        with urllib.request.urlopen(item["url"], timeout=180) as pic:
+            out.write_bytes(pic.read())
+    else:
+        raise SystemExit(f"OpenRouter не вернул картинку: {str(item)[:400]}")
+    cost = (answer.get("usage") or {}).get("cost")
+    return f"{cost} $" if cost is not None else "цена не указана"
+
+
 def generate(prompt: str, out: Path, width: int, height: int, seed: int, model: str) -> None:
+    if model in REMOTE:
+        print("OpenRouter:", generate_remote(prompt, out, width, height, seed, model), flush=True)
+        return
     command, steps = MODELS[model]
     cli = Path(sys.executable).parent / command
     saved = SAVED / f"{model}-q{QUANTIZE}"
@@ -164,7 +208,7 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--keep-bg", action="store_true", help="keep the white background")
     ap.add_argument("--force", action="store_true", help="with --batch: redraw pictures that already exist")
-    ap.add_argument("--model", choices=sorted(MODELS), default=os.environ.get("IG_IMAGEGEN_MODEL", "flux2-klein-4b"))
+    ap.add_argument("--model", choices=sorted({**MODELS, **REMOTE}), default=os.environ.get("IG_IMAGEGEN_MODEL", "flux2-klein-4b"))
     args = ap.parse_args()
     width, height = args.width or args.size, args.height or args.size
 
