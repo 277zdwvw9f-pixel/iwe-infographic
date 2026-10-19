@@ -55,7 +55,7 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 | Папка | Что |
 |---|---|
 | `SKILL.md` | инструкция агенту: как выбрать форму и облик, где взять графику, как собрать и проверить |
-| `engine/` | сборщик `build.py`, макетные листы `sheet.py`, картинки моделью `gen_image.py`, иллюстрации `illus.py`, облики `looks.css`, шрифты и значки в `assets/`; подробности — `engine/README.md` |
+| `engine/` | сборщик `build.py`, макетные листы `sheet.py`, картинки моделью `gen_image.py`, библиотека готовых картинок `library.py`, иллюстрации `illus.py`, облики `looks.css`, шрифты и значки в `assets/`; подробности — `engine/README.md` |
 | `examples/` | исходники четырёх образцов (узел с графикой, цикл, пирамида, матрица 2×2), снимок образца и макетные листы |
 | `docs/service-clause.md` | обещание навыка: что он даёт, сценарии, чего не делает |
 | `tests/` | проверки сборщика: `python3 -m unittest tests/test_infographic.py` |

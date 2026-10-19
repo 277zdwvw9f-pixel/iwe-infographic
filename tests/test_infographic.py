@@ -22,6 +22,7 @@ os.environ["IG_BRAND_DIRS"] = ""  # the tests must not depend on brand folders o
 
 import build  # noqa: E402 — path added above
 import gen_image  # noqa: E402 — imports without Pillow; drawing itself needs the image env
+import library  # noqa: E402
 import sheet  # noqa: E402
 
 PAGE = """<!doctype html>
@@ -295,6 +296,68 @@ class ChromeCheckTest(unittest.TestCase):
         problems = self.shoot(wide)
         self.assertTrue(any("на телефоне" in p for p in problems), problems)
         self.assertFalse(any("кириллица" in p for p in problems), problems)
+
+
+class LibraryTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        base = Path(self.tmp.name)
+        self.root = base / "lib"
+        self.page = base / "page"
+        self.page.mkdir()
+        (self.page / "truck.png").write_bytes(b"truck-bytes")
+        (self.page / "keys.png").write_bytes(b"keys-bytes")
+        # older table order (name, style, width, height, what) next to the current one
+        (self.page / "prompts.tsv").write_text(
+            "truck\tiso\t768\t768\ta delivery truck\nkeys\tflat\ta key ring\n", encoding="utf-8")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_add_reads_both_table_orders_and_keeps_one_copy(self):
+        first = library.add(self.page, "teal", None, "page 19.10", self.root)
+        again = library.add(self.page, "teal", None, "page 19.10", self.root)
+        rows = {r["file"]: r for r in library.read_catalog(self.root)}
+        self.assertEqual(sorted(rows), ["teal/keys.png", "teal/truck.png"])
+        self.assertEqual(rows["teal/truck.png"]["what"], "a delivery truck")
+        self.assertEqual(rows["teal/keys.png"]["style"], "flat")
+        self.assertEqual(len(first), 2)
+        self.assertTrue(all(line.startswith("уже есть") for line in again), again)
+
+    def test_same_name_other_picture_gets_new_name(self):
+        library.add(self.page, "teal", None, "", self.root)
+        other = Path(self.tmp.name) / "other"
+        other.mkdir()
+        (other / "truck.png").write_bytes(b"another truck")
+        library.add(other, "teal", None, "", self.root)
+        self.assertTrue((self.root / "teal" / "truck-2.png").exists())
+        self.assertEqual((self.root / "teal" / "truck.png").read_bytes(), b"truck-bytes")
+
+    def test_find_by_russian_word_with_other_ending_and_look_first(self):
+        library.add(self.page, "teal", None, "", self.root)
+        library.add(self.page, "red", None, "", self.root)  # same bytes: skipped, kept once
+        library.tag(["teal/truck", "грузовик доставка ЭПД", "teal/keys", "ключи доступ"], self.root)
+        hits = library.find(["грузовика"], self.root)
+        self.assertEqual([r["file"] for _, r in hits], ["teal/truck.png"])
+        self.assertEqual(library.find(["самолёт"], self.root), [])
+
+    def test_take_copies_and_does_not_overwrite(self):
+        library.add(self.page, "teal", None, "", self.root)
+        dest = Path(self.tmp.name) / "new" / "art-teal" / "hero.png"
+        library.take("teal/truck", dest, self.root)
+        self.assertEqual(dest.read_bytes(), b"truck-bytes")
+        with self.assertRaisesRegex(SystemExit, "не перезаписываю"):
+            library.take("teal/keys", dest, self.root)
+        with self.assertRaisesRegex(SystemExit, "нет такой картинки"):
+            library.take("teal/plane", Path(self.tmp.name) / "x.png", self.root)
+
+    def test_sheet_links_pictures_and_escapes_tags(self):
+        library.add(self.page, "teal", None, "", self.root)
+        library.tag(["teal/keys", "ключи <доступ>"], self.root)
+        page = library.sheet(self.root).read_text(encoding="utf-8")
+        self.assertIn('src="teal/keys.png"', page)
+        self.assertIn("ключи &lt;доступ&gt;", page)
+        self.assertIn("teal · 2", page)
 
 
 if __name__ == "__main__":
