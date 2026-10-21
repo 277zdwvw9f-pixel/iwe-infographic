@@ -389,6 +389,38 @@ class LibraryTest(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "нет такой картинки"):
             library.take("teal/plane", Path(self.tmp.name) / "x.png", self.root)
 
+    def test_root_falls_back_to_bundled_library(self):
+        from unittest import mock
+
+        with mock.patch.dict(os.environ, {"IWE_WORKSPACE": self.tmp.name}, clear=False):
+            os.environ.pop("IG_LIBRARY_DIR", None)
+            self.assertEqual(library.library_root(), library.BUNDLED)
+            (Path(self.tmp.name) / "DS-strategy" / "local" / "infographic-library").mkdir(parents=True)
+            self.assertEqual(library.library_root(), Path(self.tmp.name) / "DS-strategy" / "local" / "infographic-library")
+
+    def test_publish_refuses_brand_looks(self):
+        import library_publish
+
+        with self.assertRaisesRegex(SystemExit, "только встроенные облики"):
+            library_publish.publish(self.root, Path(self.tmp.name) / "pub", ["bright", "acme"])
+
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow lives in the image-generation environment")
+    def test_publish_webp_only_chosen_looks_and_keeps_old(self):
+        import library_publish
+        from PIL import Image
+
+        for look in ("bright", "acme"):
+            folder = Path(self.tmp.name) / look
+            folder.mkdir()
+            Image.new("RGBA", (800, 600), (200, 30, 30, 255)).save(folder / "box.png")
+            library.add(folder, look, None, "", self.root)
+        pub = Path(self.tmp.name) / "pub"
+        self.assertEqual(library_publish.publish(self.root, pub, ["bright"]), (1, 0))
+        self.assertEqual(library_publish.publish(self.root, pub, ["bright"]), (0, 1))
+        self.assertEqual([r["file"] for r in library.read_catalog(pub)], ["bright/box.webp"])
+        self.assertEqual(max(Image.open(pub / "bright" / "box.webp").size), 512)
+        self.assertFalse((pub / "acme").exists())
+
     def test_sheet_links_pictures_and_escapes_tags(self):
         library.add(self.page, "teal", None, "", self.root)
         library.tag(["teal/keys", "ключи <доступ>"], self.root)

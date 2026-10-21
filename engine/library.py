@@ -9,7 +9,8 @@
 
 The library lives outside this repository: IG_LIBRARY_DIR, by default
 $IWE_WORKSPACE/DS-strategy/local/infographic-library. Pictures drawn in a brand palette belong
-to the brand's owner, so they never go into a public repository. Layout: <look>/<name>.png and
+to the brand's owner, so they never go into a public repository. Without a local library the
+bundled library/ (built-in looks only, published by library_publish.py) is used. Layout: <look>/<name>.png and
 catalog.tsv (file, look, style, what, tags, source, added, sha256). A picture already in the
 library (same sha256) is kept once.
 see docs/service-clause.md
@@ -33,12 +34,17 @@ IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp"}
 NAME_OK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 
 
+BUNDLED = Path(__file__).resolve().parent.parent / "library"  # shareable pictures shipped with the skill
+
+
 def library_root() -> Path:
+    """IG_LIBRARY_DIR, else the local library if this machine has one, else the bundled library/."""
     env = os.environ.get("IG_LIBRARY_DIR")
     if env:
         return Path(env)
     workspace = Path(os.environ.get("IWE_WORKSPACE", Path.home() / "IWE"))
-    return workspace / "DS-strategy" / "local" / "infographic-library"
+    local = workspace / "DS-strategy" / "local" / "infographic-library"
+    return local if local.is_dir() else BUNDLED
 
 
 def read_catalog(root: Path) -> list[dict]:

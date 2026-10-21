@@ -37,6 +37,22 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 
 После сохранения полную копию модели из кэша Hugging Face (`~/.cache/huggingface/hub`) можно удалить: навык берёт сжатую копию, картинка рисуется за 35-50 секунд. Без сжатой копии модель пересжимается при каждом запуске, и Мак уходит в подкачку.
 
+## Готовые картинки (`library/`)
+
+Картинки, уже нарисованные моделью FLUX.2 Klein 4B на Маке, в десяти встроенных обликах: 85 сюжетов
+(серверы, базы данных, документы, логистика, лаборатория, люди, процессы и др.), по пять вариантов.
+Каталог `library/catalog.tsv` с русскими подписями, страница просмотра `library/index.html`.
+Сжаты в WebP до 512 точек. Брак (не тот предмет, съеденные белые части) в библиотеку не попадает.
+
+```bash
+python3 -I engine/library.py find сервер авария --look bright      # что подходит, сначала облик страницы
+python3 -I engine/library.py take bright/failover-v2 --to art-bright/failover.webp
+```
+
+Без своей локальной библиотеки `library.py` берёт эту папку. Своя библиотека (`IG_LIBRARY_DIR`, по умолчанию
+`DS-strategy/local/infographic-library/`) хранит и фирменные облики, они сюда не выкладываются; общие облики
+из неё выгружаются сюда `engine/library_publish.py`.
+
 ## Свой фирменный облик
 
 Фирменные шрифты и логотипы обычно лицензированы организации, поэтому они живут не в этом хранилище, а в локальной папке: по умолчанию `~/IWE/DS-strategy/local/infographic-brands/<имя>/`, другую можно задать переменной `IG_BRAND_DIRS`. В папке облика:
@@ -62,4 +78,4 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 
 ## Лицензии
 
-Код — MIT (`LICENSE`). Шрифты — SIL Open Font License 1.1 (`engine/assets/fonts/OFL.txt`), значки — Lucide, ISC (`engine/assets/icons/LICENSE.txt`), объёмные картинки — Microsoft Fluent Emoji, MIT (`engine/assets/emoji3d/LICENSE.txt`). Модель FLUX.2 Klein 4B — Apache-2.0, скачивается отдельно.
+Код — MIT (`LICENSE`). Шрифты — SIL Open Font License 1.1 (`engine/assets/fonts/OFL.txt`), значки — Lucide, ISC (`engine/assets/icons/LICENSE.txt`), объёмные картинки — Microsoft Fluent Emoji, MIT (`engine/assets/emoji3d/LICENSE.txt`). Модель FLUX.2 Klein 4B — Apache-2.0, скачивается отдельно. Картинки в `library/` нарисованы этой моделью и выложены под той же лицензией MIT, что и код.
