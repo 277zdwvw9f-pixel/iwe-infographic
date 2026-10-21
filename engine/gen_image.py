@@ -47,15 +47,17 @@ NO_TEXT = ", no text, no letters, no numbers, no logo, no watermark"
 PALETTES = {
     "bright": "bright blue, orange and green accents with white",
     "night": "cyan and violet accents with dark navy details",
-    "blueprint": "blue and white technical colours",
+    "blueprint": "blue and light grey technical colours",
     "pop": "saturated yellow, pink and teal colours with black outlines",
     "watercolor": "soft watercolour pastel colours",
     "strict": "black, white and one orange accent",
-    "editorial": "charcoal, warm cream and one deep red accent",
-    "sketch": "pencil grey on off-white with one blue accent",
+    "editorial": "charcoal, warm beige and one deep red accent",
+    "sketch": "pencil grey and light grey with one blue accent",
     "steampunk": "brass, copper and dark brown colours",
     "fantasy": "parchment, gold and deep green colours",
 }
+# Near-white is cut away with the background (WHITE_TOLERANCE), so palettes avoid "white" and "cream":
+# white parts of an object that touch the background vanish with it (seen 21.10 in the strict look).
 DEFAULT_PALETTE = "soft pastel colours"
 # Few-step distilled models (mflux 0.22): command and number of steps each one needs.
 MODELS = {
