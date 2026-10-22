@@ -55,6 +55,8 @@ PALETTES = {
     "sketch": "pencil grey and light grey with one blue accent",
     "steampunk": "brass, copper and dark brown colours",
     "fantasy": "parchment, gold and deep green colours",
+    "corp-orange": "warm amber and orange colours with light grey and white",
+    "corp-green": "teal and turquoise colours with light grey and white",
 }
 # Near-white is cut away with the background (WHITE_TOLERANCE), so palettes avoid "white" and "cream":
 # white parts of an object that touch the background vanish with it (seen 21.10 in the strict look).

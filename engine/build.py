@@ -39,6 +39,8 @@ LOOK_FONTS = {
     "steampunk": ["Old Standard TT", "PT Serif"],
     "fantasy": ["Ruslan Display", "Alegreya"],
     "sketch": ["Neucha", "Pangolin"],
+    "corp-orange": ["Onest"],
+    "corp-green": ["Onest"],
 }
 LOOK_NAMES = {
     "strict": "Строгий",
@@ -51,6 +53,8 @@ LOOK_NAMES = {
     "steampunk": "Стимпанк",
     "fantasy": "Фэнтези",
     "sketch": "Эскиз",
+    "corp-orange": "Оранжевый корпоративный",
+    "corp-green": "Зелёный корпоративный",
 }
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 PHONE_WIDTH = 390

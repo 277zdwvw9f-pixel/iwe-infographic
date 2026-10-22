@@ -217,7 +217,8 @@ class GenImageTest(unittest.TestCase):
                 gen_image.generate_remote("a plant", Path(tmp) / "x.png", 768, 768, 1, "openrouter-flux2-klein-4b")
 
     def test_every_builtin_look_has_its_own_palette(self):
-        looks = ["strict", "bright", "editorial", "blueprint", "night", "watercolor", "sketch", "pop", "steampunk", "fantasy"]
+        looks = ["strict", "bright", "editorial", "blueprint", "night", "watercolor", "sketch", "pop", "steampunk", "fantasy",
+                 "corp-orange", "corp-green"]
         palettes = [gen_image.palette_for(look) for look in looks]
         self.assertEqual(len(set(palettes)), len(looks))
         self.assertNotIn(gen_image.DEFAULT_PALETTE, palettes)

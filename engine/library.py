@@ -8,8 +8,8 @@
     library.py sheet [-o FILE]                                                one page to look through
 
 The library lives outside this repository: IG_LIBRARY_DIR, by default
-$IWE_WORKSPACE/DS-strategy/local/infographic-library. Pictures drawn in a brand palette belong
-to the brand's owner, so they never go into a public repository. Without a local library the
+$IWE_WORKSPACE/DS-strategy/local/infographic-library. Pictures drawn in a brand palette go into
+a public repository only with the owner's consent and under a built-in look name (library_publish.py --as). Without a local library the
 bundled library/ (built-in looks only, published by library_publish.py) is used. Layout: <look>/<name>.png and
 catalog.tsv (file, look, style, what, tags, source, added, sha256). A picture already in the
 library (same sha256) is kept once.

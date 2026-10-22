@@ -1,4 +1,4 @@
-/* Infographic components and ten looks.
+/* Infographic components and twelve looks.
    Components only read variables; a look is a set of variables plus a few overrides
    under html[data-look=...]. Colour "tones" 1-5 are picked per element with data-tone. */
 
@@ -1142,3 +1142,370 @@ html[data-look="strict"] .ig-art, html[data-look="editorial"] .ig-art { backgrou
 .ig-switch button[aria-pressed="true"] { background: #fff; color: #111; }
 
 html[data-look="pop"] .ig-art .ig-illus { --ta: #ffffff; --tb: #9b9b9b; --il-line: #3c3c3c; }
+
+/* ---------- Look: corp-orange ---------- */
+/* Оранжевый корпоративный: один тёплый оранжевый тон с его оттенками и светлыми подложками, графит для текста и линий, второго цвета нет; одна сплошная плитка в ряду.
+   Palette-only corporate look: free font, no logo. */
+
+html[data-look="corp-orange"] {
+  --p-main: #f2a900;
+  --p-dark: #db8a06;
+  --p-mid: #f8ba46;
+  --p-light: #f8e08e;
+  --p-g90: #3c3c3c;
+  --p-g70: #6d6c6c;
+  --p-g45: #9b9b9b;
+  --p-g20: #cfcfcf;
+
+  --p-tint: color-mix(in srgb, var(--p-main) 12%, #ffffff);
+  --p-grey-tint: color-mix(in srgb, var(--p-g20) 32%, #ffffff);
+
+  --bg: #ffffff;
+  --card: #ffffff;
+  --card-solid: #ffffff;
+  --ink: var(--p-g90);
+  --muted: var(--p-g70);
+  --line: color-mix(in srgb, var(--p-g20) 60%, #ffffff);
+  --line-strong: var(--p-g70);
+  --accent: var(--p-main);
+  --good: var(--p-dark);
+  --bad: var(--p-dark);
+
+  --t1: var(--p-main);
+  --t2: var(--p-dark);
+  --t3: var(--p-mid);
+  --t4: var(--p-g70);
+  --t5: var(--p-light);
+  --on-tone: #ffffff;
+  --soft-pct: 12%;
+  --font-body: "Onest", Arial, sans-serif;
+  --font-head: "Onest", Arial, sans-serif;
+  --font-num: "Onest", Arial, sans-serif;
+  --font-label: "Onest", Arial, sans-serif;
+  --head-weight: 700;
+  --num-weight: 700;
+  --head-tracking: -0.01em;
+  --h1-size: 56px;
+  --h2-size: 30px;
+  --h3-size: 20px;
+  --hero-num-size: 104px;
+  --stat-num-size: 50px;
+
+  --radius: 16px;
+  --radius-lg: 0;
+  --icon-radius: 8px;
+  --shadow: none;
+  --card-border: 1px solid var(--line);
+  --gap: 20px;
+  --gap-section: 64px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: var(--accent);
+  --hero-pad: 92px 0 36px;
+}
+
+html[data-look="corp-orange"] .ig * { --tone-soft: color-mix(in srgb, var(--p-main) 10%, #ffffff); --tone-num: var(--p-dark); }
+html[data-look="corp-orange"] [data-tone="2"], html[data-look="corp-orange"] [data-tone="2"] * { --tone-soft: color-mix(in srgb, var(--p-main) 17%, #ffffff); }
+html[data-look="corp-orange"] [data-tone="4"], html[data-look="corp-orange"] [data-tone="4"] * { --tone-soft: var(--p-grey-tint); --tone-num: var(--p-g90); }
+
+html[data-look="corp-orange"] .ig-hero h1, html[data-look="corp-orange"] .ig-h { color: var(--accent); }
+html[data-look="corp-orange"] .ig-h .ig-icon { color: var(--accent); }
+html[data-look="corp-orange"] .ig-icon { stroke-width: 1.5; }
+html[data-look="corp-orange"] .ig-sub { font-size: 17px; }
+html[data-look="corp-orange"] .ig-note, html[data-look="corp-orange"] .ig-stat > small, html[data-look="corp-orange"] .ig-node > small,
+html[data-look="corp-orange"] .ig-link > small, html[data-look="corp-orange"] .ig-hero-figure span, html[data-look="corp-orange"] .ig-foot,
+html[data-look="corp-orange"] .ig-list > li > span, html[data-look="corp-orange"] .ig-donut > div > small { font-weight: 300; }
+html[data-look="corp-orange"] .ig-range > span { font-weight: 400; }
+
+html[data-look="corp-orange"] .ig-hero { border-bottom: 1px solid var(--p-g90); border-radius: 0; overflow: visible; }
+html[data-look="corp-orange"] .ig-kicker { position: absolute; top: 14px; left: 0; color: var(--muted); font-weight: 400; font-size: 13px; letter-spacing: 0.08em; }
+html[data-look="corp-orange"] .ig-lead { font-weight: 400; font-size: 19px; }
+
+html[data-look="corp-orange"] .ig-stat { background: var(--tone-soft); border: 0; }
+html[data-look="corp-orange"] .ig-stat > b { color: var(--tone-num); }
+html[data-look="corp-orange"] .ig-stat > span { font-weight: 700; font-size: 17px; line-height: 1.3; }
+html[data-look="corp-orange"] .ig-stat > .ig-icon { width: 34px; height: 34px; padding: 0; background: none; color: var(--tone-num); }
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child { --tone: var(--p-main); background: var(--p-main); color: #ffffff; }
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > b, html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > span,
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > small, html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > .ig-icon { color: #ffffff; }
+
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > small { font-weight: 400; }
+
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > span, html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > small { color: var(--p-g90); }
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child::after { content: ""; position: absolute; top: 0; right: 0; width: 62%; height: 70%; z-index: -1; border-top-right-radius: inherit; pointer-events: none;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0 1.5px, transparent 1.5px 9px);
+  -webkit-mask-image: linear-gradient(to bottom left, #000 0%, transparent 72%); mask-image: linear-gradient(to bottom left, #000 0%, transparent 72%); }
+
+html[data-look="corp-orange"] .ig-3d { filter: grayscale(1) contrast(1.08) brightness(1.04); }
+html[data-look="corp-orange"] .ig-stats > .ig-stat:first-child > .ig-3d { filter: grayscale(1) brightness(1.7) contrast(0.9); }
+
+html[data-look="corp-orange"] .ig-hero-art { padding: 16px 22px; gap: 14px; border-radius: var(--radius); background: var(--p-tint); }
+
+html[data-look="corp-orange"] .ig-range { --tone: var(--p-main); }
+html[data-look="corp-orange"] .ig-range > em { color: var(--p-dark); }
+html[data-look="corp-orange"] .ig-range::before, html[data-look="corp-orange"] .ig-range::after { height: 12px; border-radius: 4px; }
+html[data-look="corp-orange"] .ig-range::before { opacity: 1; background: var(--p-grey-tint); }
+html[data-look="corp-orange"] .ig-donut { --tone: var(--p-main); }
+html[data-look="corp-orange"] .ig-donut > i > b { color: var(--p-dark); }
+
+html[data-look="corp-orange"] .ig-node { border-radius: 10px; }
+html[data-look="corp-orange"] .ig-node > .ig-icon { border-radius: 8px; }
+html[data-look="corp-orange"] .ig-link::after { border-bottom-width: 2px; }
+html[data-look="corp-orange"] .ig-link::before { border-top-width: 2px; border-right-width: 2px; width: 10px; height: 10px; bottom: -4px; }
+html[data-look="corp-orange"] .ig-under > .ig-icon { width: 34px; height: 34px; }
+
+html[data-look="corp-orange"] .ig-col.is-pick { outline: 0; border: 1.5px solid var(--p-main); }
+html[data-look="corp-orange"] .ig-badge { background: var(--p-main); color: #ffffff; border-radius: 6px; font-size: 12px; padding: 3px 10px; letter-spacing: 0.06em; }
+html[data-look="corp-orange"] .ig-col li::before { font-weight: 700; font-size: 15px; background: var(--p-grey-tint); color: var(--p-g70); }
+html[data-look="corp-orange"] .ig-col li[data-mark="plus"]::before { background: var(--p-tint); color: var(--p-dark); }
+html[data-look="corp-orange"] .ig-col li[data-mark="minus"]::before { background: var(--p-grey-tint); color: var(--p-g70); }
+
+html[data-look="corp-orange"] .ig-callout { border-radius: var(--radius); }
+html[data-look="corp-orange"] .ig-callout > .ig-icon { width: 34px; height: 34px; stroke-width: 1.75; }
+html[data-look="corp-orange"] .ig-callout[data-kind="risk"] { background: color-mix(in srgb, var(--p-main) 16%, #ffffff); }
+html[data-look="corp-orange"] .ig-callout[data-kind="risk"] > .ig-icon { color: var(--p-dark); }
+html[data-look="corp-orange"] .ig-callout[data-kind="tip"] { background: var(--p-grey-tint); }
+html[data-look="corp-orange"] .ig-callout[data-kind="tip"] > .ig-icon { color: var(--p-dark); }
+
+html[data-look="corp-orange"] .ig-list > li { grid-template-columns: 40px 1fr; }
+html[data-look="corp-orange"] .ig-list > li::before { content: counter(item, decimal-leading-zero); width: auto; height: auto; place-items: start; border: 0; background: none; color: var(--p-main); font-size: 22px; font-weight: 700; line-height: 1.1; }
+
+html[data-look="corp-orange"] .ig-step::before { border-radius: 8px; background: var(--p-main); }
+html[data-look="corp-orange"] .ig-chip { border-radius: 6px; background: var(--tone-soft); color: var(--tone-num); border: 0; }
+html[data-look="corp-orange"] .ig-out, html[data-look="corp-orange"] .ig-final { background: var(--tone-soft); border: 0; }
+html[data-look="corp-orange"] .ig-cycle::before { border: 2px solid var(--line); }
+html[data-look="corp-orange"] .ig-timeline::before { border-top-width: 2px; }
+
+html[data-look="corp-orange"] .ig-art { background: var(--tone-soft); }
+html[data-look="corp-orange"] .ig-hub-item::after { border-top: 2px solid var(--line); }
+html[data-look="corp-orange"] .ig-hub-center::before { border-left: 2px dashed var(--line); }
+html[data-look="corp-orange"] .ig-progress { height: 8px; border-radius: 4px; background: var(--p-grey-tint); }
+html[data-look="corp-orange"] .ig-progress::after { background: var(--p-main); }
+html[data-look="corp-orange"] .ig-pict > .ig-icon { color: var(--p-g20); }
+html[data-look="corp-orange"] .ig-pict > .ig-icon.is-on { color: var(--p-main); stroke-width: 2; }
+html[data-look="corp-orange"] .ig-pict-legend b { color: var(--p-dark); }
+
+html[data-look="corp-orange"] .ig-count { border: 0; height: 36px; padding: 0 12px; border-radius: 8px; background: var(--p-tint); color: var(--p-dark); font-size: 19px; }
+html[data-look="corp-orange"] .ig-count::after { display: none; }
+html[data-look="corp-orange"] .ig-timer { width: 104px; height: 104px; border: 0; background: radial-gradient(circle, #ffffff 0 63%, transparent 64%), conic-gradient(var(--p-main) calc(var(--v, 100) * 1%), var(--p-grey-tint) 0); }
+html[data-look="corp-orange"] .ig-timer::before { top: -11px; height: 7px; background: var(--p-g45); }
+html[data-look="corp-orange"] .ig-timer::after { top: 8px; right: 6px; width: 10px; height: 6px; background: var(--p-g45); }
+html[data-look="corp-orange"] .ig-timer > b { color: var(--p-dark); font-size: 22px; }
+html[data-look="corp-orange"] .ig-timer > small { font-weight: 400; color: var(--muted); }
+html[data-look="corp-orange"] .ig-cal { border: 2px solid var(--p-g20); border-radius: 10px; }
+html[data-look="corp-orange"] .ig-cal::after { background: linear-gradient(var(--p-g45), var(--p-g45)) left / 3px 100% no-repeat, linear-gradient(var(--p-g45), var(--p-g45)) right / 3px 100% no-repeat; }
+
+html[data-look="corp-orange"] .ig-banner { clip-path: none; border: 0; border-radius: var(--radius); background: var(--p-tint); padding: 20px 28px; font-size: 17px; }
+
+html[data-look="corp-orange"] .ig-illus { --il-line: var(--p-g90); }
+html[data-look="corp-orange"] .ig-illus .f1 { fill: #ffffff; }
+html[data-look="corp-orange"] .ig-illus .f2 { fill: var(--p-light); }
+html[data-look="corp-orange"] .ig-illus .f3 { fill: var(--p-mid); }
+html[data-look="corp-orange"] .ig-illus .g1 { fill: #ffffff; }
+html[data-look="corp-orange"] .ig-illus .g2 { fill: var(--p-g20); }
+html[data-look="corp-orange"] .ig-illus .g3 { fill: var(--p-g45); }
+html[data-look="corp-orange"] .ig-illus .o { stroke-width: 1.4; }
+html[data-look="corp-orange"] .ig-illus .ln { stroke-width: 1.6; }
+html[data-look="corp-orange"] .ig-illus .thick { stroke-width: 2.6; }
+html[data-look="corp-orange"] .ig-illus .a { stroke: var(--p-dark); }
+html[data-look="corp-orange"] .ig-illus .k { fill: var(--p-g90); }
+html[data-look="corp-orange"] .ig-illus .led { fill: var(--p-main); }
+html[data-look="corp-orange"] .ig-illus .warn { fill: var(--p-main); }
+html[data-look="corp-orange"] .ig-illus .smoke { fill: var(--p-grey-tint); }
+
+html[data-look="corp-orange"] .ig-foot { border-top: 0; padding-top: 0; }
+html[data-look="corp-orange"] .ig-foot::after { content: ""; display: block; height: 10px; margin-top: 16px; border-radius: 3px; background: linear-gradient(90deg, var(--p-g20) 0 24%, transparent 24% 24.8%, var(--p-main) 24.8% 100%); }
+
+@media (max-width: 760px) {
+  html[data-look="corp-orange"] { --h1-size: 34px; --h2-size: 25px; --hero-num-size: 68px; --stat-num-size: 40px; --hero-pad: 70px 0 28px; }
+  html[data-look="corp-orange"] .ig-kicker { position: static; }
+
+  html[data-look="corp-orange"] .ig .ig-hub .ig-feature { grid-template-columns: 92px minmax(0, 1fr); }
+  html[data-look="corp-orange"] .ig-hub .ig-art { min-height: 0; padding: 10px; }
+  html[data-look="corp-orange"] .ig-hub .ig-feature-body { padding: 16px 16px 0 0; }
+  html[data-look="corp-orange"] .ig-hub .ig-feature-badges { padding: 0 16px 16px 0; }
+  html[data-look="corp-orange"] .ig-hub .ig-feature:not(:has(.ig-feature-badges)) .ig-feature-body { padding-bottom: 16px; }
+}
+
+/* ---------- Look: corp-green ---------- */
+/* Зелёный корпоративный: один бирюзово-зелёный тон с его оттенками и светлыми подложками, графит для текста и линий, янтарный - только редкое предупреждение; одна сплошная плитка в ряду.
+   Palette-only corporate look: free font, no logo. */
+
+html[data-look="corp-green"] {
+  --p-main: #00afac;
+  --p-dark: #2c918f;
+  --p-mid: #57b2ab;
+  --p-light: #90cec9;
+  --p-g90: #3c3c3c;
+  --p-g70: #6d6c6c;
+  --p-g45: #9b9b9b;
+  --p-g20: #cfcfcf;
+  --p-warn: #f2a900;
+
+  --p-tint: color-mix(in srgb, var(--p-main) 9%, #ffffff);
+  --p-grey-tint: color-mix(in srgb, var(--p-g20) 32%, #ffffff);
+
+  --bg: #ffffff;
+  --card: #ffffff;
+  --card-solid: #ffffff;
+  --ink: var(--p-g90);
+  --muted: var(--p-g70);
+  --line: color-mix(in srgb, var(--p-g20) 60%, #ffffff);
+  --line-strong: var(--p-g70);
+  --accent: var(--p-main);
+  --good: var(--p-dark);
+  --bad: var(--p-warn);
+
+  --t1: var(--p-main);
+  --t2: var(--p-dark);
+  --t3: var(--p-mid);
+  --t4: var(--p-g70);
+  --t5: var(--p-light);
+  --on-tone: #ffffff;
+  --soft-pct: 12%;
+  --font-body: "Onest", Arial, sans-serif;
+  --font-head: "Onest", Arial, sans-serif;
+  --font-num: "Onest", Arial, sans-serif;
+  --font-label: "Onest", Arial, sans-serif;
+  --head-weight: 700;
+  --num-weight: 700;
+  --head-tracking: -0.01em;
+  --h1-size: 56px;
+  --h2-size: 30px;
+  --h3-size: 20px;
+  --hero-num-size: 104px;
+  --stat-num-size: 50px;
+
+  --radius: 16px;
+  --radius-lg: 0;
+  --icon-radius: 8px;
+  --shadow: none;
+  --card-border: 1px solid var(--line);
+  --gap: 20px;
+  --gap-section: 64px;
+  --hero-bg: transparent;
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  --hero-accent: var(--accent);
+  --hero-pad: 92px 0 36px;
+}
+
+html[data-look="corp-green"] .ig * { --tone-soft: color-mix(in srgb, var(--p-main) 10%, #ffffff); --tone-num: var(--p-dark); }
+html[data-look="corp-green"] [data-tone="2"], html[data-look="corp-green"] [data-tone="2"] * { --tone-soft: color-mix(in srgb, var(--p-main) 17%, #ffffff); }
+html[data-look="corp-green"] [data-tone="4"], html[data-look="corp-green"] [data-tone="4"] * { --tone-soft: var(--p-grey-tint); --tone-num: var(--p-g90); }
+
+html[data-look="corp-green"] .ig-hero h1, html[data-look="corp-green"] .ig-h { color: var(--accent); }
+html[data-look="corp-green"] .ig-h .ig-icon { color: var(--accent); }
+html[data-look="corp-green"] .ig-icon { stroke-width: 1.5; }
+html[data-look="corp-green"] .ig-sub { font-size: 17px; }
+html[data-look="corp-green"] .ig-note, html[data-look="corp-green"] .ig-stat > small, html[data-look="corp-green"] .ig-node > small,
+html[data-look="corp-green"] .ig-link > small, html[data-look="corp-green"] .ig-hero-figure span, html[data-look="corp-green"] .ig-foot,
+html[data-look="corp-green"] .ig-list > li > span, html[data-look="corp-green"] .ig-donut > div > small { font-weight: 300; }
+html[data-look="corp-green"] .ig-range > span { font-weight: 400; }
+
+html[data-look="corp-green"] .ig-hero { border-bottom: 1px solid var(--p-g90); border-radius: 0; overflow: visible; }
+html[data-look="corp-green"] .ig-kicker { position: absolute; top: 14px; left: 0; color: var(--muted); font-weight: 400; font-size: 13px; letter-spacing: 0.08em; }
+html[data-look="corp-green"] .ig-lead { font-weight: 400; font-size: 19px; }
+
+html[data-look="corp-green"] .ig-stat { background: var(--tone-soft); border: 0; }
+html[data-look="corp-green"] .ig-stat > b { color: var(--tone-num); }
+html[data-look="corp-green"] .ig-stat > span { font-weight: 700; font-size: 17px; line-height: 1.3; }
+html[data-look="corp-green"] .ig-stat > .ig-icon { width: 34px; height: 34px; padding: 0; background: none; color: var(--tone-num); }
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child { --tone: var(--p-main); background: var(--p-main); color: #ffffff; }
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > b, html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > span,
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > small, html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > .ig-icon { color: #ffffff; }
+
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > small { font-weight: 400; }
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child::after { content: ""; position: absolute; top: 0; right: 0; width: 62%; height: 70%; z-index: -1; border-top-right-radius: inherit; pointer-events: none;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0 1.5px, transparent 1.5px 9px);
+  -webkit-mask-image: linear-gradient(to bottom left, #000 0%, transparent 72%); mask-image: linear-gradient(to bottom left, #000 0%, transparent 72%); }
+
+html[data-look="corp-green"] .ig-3d { filter: grayscale(1) contrast(1.08) brightness(1.04); }
+html[data-look="corp-green"] .ig-stats > .ig-stat:first-child > .ig-3d { filter: grayscale(1) brightness(1.7) contrast(0.9); }
+
+html[data-look="corp-green"] .ig-hero-art { padding: 16px 22px; gap: 14px; border-radius: var(--radius); background: var(--p-tint); }
+
+html[data-look="corp-green"] .ig-range { --tone: var(--p-main); }
+html[data-look="corp-green"] .ig-range > em { color: var(--p-dark); }
+html[data-look="corp-green"] .ig-range::before, html[data-look="corp-green"] .ig-range::after { height: 12px; border-radius: 4px; }
+html[data-look="corp-green"] .ig-range::before { opacity: 1; background: var(--p-grey-tint); }
+html[data-look="corp-green"] .ig-donut { --tone: var(--p-main); }
+html[data-look="corp-green"] .ig-donut > i > b { color: var(--p-dark); }
+
+html[data-look="corp-green"] .ig-node { border-radius: 10px; }
+html[data-look="corp-green"] .ig-node > .ig-icon { border-radius: 8px; }
+html[data-look="corp-green"] .ig-link::after { border-bottom-width: 2px; }
+html[data-look="corp-green"] .ig-link::before { border-top-width: 2px; border-right-width: 2px; width: 10px; height: 10px; bottom: -4px; }
+html[data-look="corp-green"] .ig-under > .ig-icon { width: 34px; height: 34px; }
+
+html[data-look="corp-green"] .ig-col.is-pick { outline: 0; border: 1.5px solid var(--p-main); }
+html[data-look="corp-green"] .ig-badge { background: var(--p-main); color: #ffffff; border-radius: 6px; font-size: 12px; padding: 3px 10px; letter-spacing: 0.06em; }
+html[data-look="corp-green"] .ig-col li::before { font-weight: 700; font-size: 15px; background: var(--p-grey-tint); color: var(--p-g70); }
+html[data-look="corp-green"] .ig-col li[data-mark="plus"]::before { background: var(--p-tint); color: var(--p-dark); }
+html[data-look="corp-green"] .ig-col li[data-mark="minus"]::before { background: var(--p-grey-tint); color: var(--p-g70); }
+
+html[data-look="corp-green"] .ig-callout { border-radius: var(--radius); }
+html[data-look="corp-green"] .ig-callout > .ig-icon { width: 34px; height: 34px; stroke-width: 1.75; }
+html[data-look="corp-green"] .ig-callout[data-kind="risk"] { background: color-mix(in srgb, var(--p-warn) 13%, #ffffff); }
+html[data-look="corp-green"] .ig-callout[data-kind="risk"] > .ig-icon { color: var(--p-warn); }
+
+html[data-look="corp-green"] .ig-list > li { grid-template-columns: 40px 1fr; }
+html[data-look="corp-green"] .ig-list > li::before { content: counter(item, decimal-leading-zero); width: auto; height: auto; place-items: start; border: 0; background: none; color: var(--p-main); font-size: 22px; font-weight: 700; line-height: 1.1; }
+
+html[data-look="corp-green"] .ig-step::before { border-radius: 8px; background: var(--p-main); }
+html[data-look="corp-green"] .ig-chip { border-radius: 6px; background: var(--tone-soft); color: var(--tone-num); border: 0; }
+html[data-look="corp-green"] .ig-out, html[data-look="corp-green"] .ig-final { background: var(--tone-soft); border: 0; }
+html[data-look="corp-green"] .ig-cycle::before { border: 2px solid var(--line); }
+html[data-look="corp-green"] .ig-timeline::before { border-top-width: 2px; }
+
+html[data-look="corp-green"] .ig-art { background: var(--tone-soft); }
+html[data-look="corp-green"] .ig-hub-item::after { border-top: 2px solid var(--line); }
+html[data-look="corp-green"] .ig-hub-center::before { border-left: 2px dashed var(--line); }
+html[data-look="corp-green"] .ig-progress { height: 8px; border-radius: 4px; background: var(--p-grey-tint); }
+html[data-look="corp-green"] .ig-progress::after { background: var(--p-main); }
+html[data-look="corp-green"] .ig-pict > .ig-icon { color: var(--p-g20); }
+html[data-look="corp-green"] .ig-pict > .ig-icon.is-on { color: var(--p-main); stroke-width: 2; }
+html[data-look="corp-green"] .ig-pict-legend b { color: var(--p-dark); }
+
+html[data-look="corp-green"] .ig-count { border: 0; height: 36px; padding: 0 12px; border-radius: 8px; background: var(--p-tint); color: var(--p-dark); font-size: 19px; }
+html[data-look="corp-green"] .ig-count::after { display: none; }
+html[data-look="corp-green"] .ig-timer { width: 104px; height: 104px; border: 0; background: radial-gradient(circle, #ffffff 0 63%, transparent 64%), conic-gradient(var(--p-main) calc(var(--v, 100) * 1%), var(--p-grey-tint) 0); }
+html[data-look="corp-green"] .ig-timer::before { top: -11px; height: 7px; background: var(--p-g45); }
+html[data-look="corp-green"] .ig-timer::after { top: 8px; right: 6px; width: 10px; height: 6px; background: var(--p-g45); }
+html[data-look="corp-green"] .ig-timer > b { color: var(--p-dark); font-size: 22px; }
+html[data-look="corp-green"] .ig-timer > small { font-weight: 400; color: var(--muted); }
+html[data-look="corp-green"] .ig-cal { border: 2px solid var(--p-g20); border-radius: 10px; }
+html[data-look="corp-green"] .ig-cal::after { background: linear-gradient(var(--p-g45), var(--p-g45)) left / 3px 100% no-repeat, linear-gradient(var(--p-g45), var(--p-g45)) right / 3px 100% no-repeat; }
+
+html[data-look="corp-green"] .ig-banner { clip-path: none; border: 0; border-radius: var(--radius); background: var(--p-tint); padding: 20px 28px; font-size: 17px; }
+
+html[data-look="corp-green"] .ig-illus { --il-line: var(--p-g90); }
+html[data-look="corp-green"] .ig-illus .f1 { fill: #ffffff; }
+html[data-look="corp-green"] .ig-illus .f2 { fill: var(--p-light); }
+html[data-look="corp-green"] .ig-illus .f3 { fill: var(--p-mid); }
+html[data-look="corp-green"] .ig-illus .g1 { fill: #ffffff; }
+html[data-look="corp-green"] .ig-illus .g2 { fill: var(--p-g20); }
+html[data-look="corp-green"] .ig-illus .g3 { fill: var(--p-g45); }
+html[data-look="corp-green"] .ig-illus .o { stroke-width: 1.4; }
+html[data-look="corp-green"] .ig-illus .ln { stroke-width: 1.6; }
+html[data-look="corp-green"] .ig-illus .thick { stroke-width: 2.6; }
+html[data-look="corp-green"] .ig-illus .a { stroke: var(--p-dark); }
+html[data-look="corp-green"] .ig-illus .k { fill: var(--p-g90); }
+html[data-look="corp-green"] .ig-illus .led { fill: var(--p-main); }
+html[data-look="corp-green"] .ig-illus .warn { fill: var(--p-warn); }
+html[data-look="corp-green"] .ig-illus .smoke { fill: var(--p-grey-tint); }
+
+html[data-look="corp-green"] .ig-foot { border-top: 0; padding-top: 0; }
+html[data-look="corp-green"] .ig-foot::after { content: ""; display: block; height: 10px; margin-top: 16px; border-radius: 3px; background: linear-gradient(90deg, var(--p-g20) 0 24%, transparent 24% 24.8%, var(--p-main) 24.8% 100%); }
+
+@media (max-width: 760px) {
+  html[data-look="corp-green"] { --h1-size: 34px; --h2-size: 25px; --hero-num-size: 68px; --stat-num-size: 40px; --hero-pad: 70px 0 28px; }
+  html[data-look="corp-green"] .ig-kicker { position: static; }
+
+  html[data-look="corp-green"] .ig .ig-hub .ig-feature { grid-template-columns: 92px minmax(0, 1fr); }
+  html[data-look="corp-green"] .ig-hub .ig-art { min-height: 0; padding: 10px; }
+  html[data-look="corp-green"] .ig-hub .ig-feature-body { padding: 16px 16px 0 0; }
+  html[data-look="corp-green"] .ig-hub .ig-feature-badges { padding: 0 16px 16px 0; }
+  html[data-look="corp-green"] .ig-hub .ig-feature:not(:has(.ig-feature-badges)) .ig-feature-body { padding-bottom: 16px; }
+}
