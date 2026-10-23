@@ -10,8 +10,9 @@ Runs under the python of the image-generation environment, which has mflux and P
 
 The prompt says WHAT to draw; --style and --look add HOW (render, palette). The picture never
 carries text: the page sets all text itself, so Cyrillic stays exact and numbers stay editable.
-The white background is cut away by a flood fill from the edges (white parts inside the object
-stay), then the picture is trimmed to its content. Local models: nothing leaves the machine.
+The background is cut away by an object-segmentation model (cutout.py, BiRefNet) when the
+environment has it, otherwise by a flood fill of near-white from the edges, which also takes white
+parts of the object that touch the background; then the picture is trimmed to its content. Local models: nothing leaves the machine.
 --model openrouter-*: the prompt (a generic description plus palette words, never text from the
 material) goes to OpenRouter, key in OPENROUTER_API_KEY; for urgent pictures in the daytime.
 see docs/service-clause.md
@@ -184,6 +185,19 @@ def read_batch(path: Path) -> list[dict]:
     return rows
 
 
+def cut(img):
+    """Picture without its background: the segmentation model if installed, else the white flood fill."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import cutout
+
+    if cutout.available():
+        try:
+            return cutout.cut_model(img)
+        except Exception as exc:  # a failed model must not cost the picture: fall back, but say so
+            print(f"модель обрезки не сработала ({exc!r}) - режу по белому", file=sys.stderr)
+    return cut_background(img)
+
+
 def draw(what: str, out: Path, style: str, look: str | None, width: int, height: int, seed: int, model: str, keep_bg: bool) -> str:
     from PIL import Image  # only the image-generation environment has Pillow
 
@@ -194,7 +208,7 @@ def draw(what: str, out: Path, style: str, look: str | None, width: int, height:
         generate(prompt, raw, width, height, seed, model)
         img = Image.open(raw)
         if not keep_bg and style != "backdrop":  # a backdrop keeps its own background
-            img = cut_background(img)
+            img = cut(img)
         img.save(out)
     return f"{out} ({img.size[0]}×{img.size[1]})"
 

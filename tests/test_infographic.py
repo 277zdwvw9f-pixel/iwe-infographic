@@ -21,6 +21,7 @@ sys.path.insert(0, str(SOURCE))
 os.environ["IG_BRAND_DIRS"] = ""  # the tests must not depend on brand folders of this machine
 
 import build  # noqa: E402 — path added above
+import cutout  # noqa: E402 — imports without the model; cutting itself needs the image env
 import gen_image  # noqa: E402 — imports without Pillow; drawing itself needs the image env
 import library  # noqa: E402
 import sheet  # noqa: E402
@@ -242,6 +243,67 @@ class GenImageTest(unittest.TestCase):
         self.assertEqual(cut.getpixel((10, 6))[3], 255)  # the hole stays: it does not touch the edge
         self.assertEqual(cut.getpixel((0, 0)), (200, 30, 30, 255))
 
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow lives in the image-generation environment")
+    def test_cut_fallback(self):
+        import contextlib
+        import io
+
+        from PIL import Image
+
+        img = Image.new("RGB", (40, 30), "white")
+        img.paste((200, 30, 30), (10, 8, 30, 22))
+
+        def broken(_img):
+            raise RuntimeError("no weights")
+
+        saved = cutout.available, cutout.cut_model
+        try:
+            cutout.available = lambda: False
+            self.assertEqual(gen_image.cut(img).size, (20, 14))  # no model: the white flood fill
+            cutout.available, cutout.cut_model = (lambda: True), broken
+            err = io.StringIO()
+            with contextlib.redirect_stderr(err):
+                self.assertEqual(gen_image.cut(img).size, (20, 14))  # a failing model costs nothing
+            self.assertIn("режу по белому", err.getvalue())
+        finally:
+            cutout.available, cutout.cut_model = saved
+
+
+class CutoutTest(unittest.TestCase):
+    """A re-cut keeps a first copy, always starts from it, updates the catalog and resumes."""
+
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow lives in the image-generation environment")
+    def test_recut(self):
+        from PIL import Image
+
+        seen = []
+
+        def fake(img):
+            seen.append(img.getpixel((0, 0)))
+            out = img.convert("RGBA")
+            out.putalpha(128)
+            return out
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "bright").mkdir()
+            for name in ("a", "b"):
+                Image.new("RGBA", (8, 8), (10, 20, 30, 255)).save(root / "bright" / f"{name}.png")
+            library.write_catalog(root, [{"file": f"bright/{n}.png", "look": "bright", "sha256": "old"} for n in ("a", "b")])
+            saved = cutout.cut_model
+            cutout.cut_model = fake
+            try:
+                self.assertEqual(cutout.recut(root, ["bright"], limit=1), (1, 0))
+                self.assertEqual(cutout.recut(root, ["bright"]), (1, 1))  # resumes: a is not cut twice
+                (root / cutout.BACKUP / "recut-done.txt").unlink()
+                cutout.recut(root, ["bright"], limit=1)
+            finally:
+                cutout.cut_model = saved
+            self.assertTrue((root / cutout.BACKUP / "bright" / "a.png").exists())
+            self.assertEqual(seen[-1][3], 255)  # the repeat started from the first copy, not the cut file
+            self.assertEqual(Image.open(root / "bright" / "a.png").getpixel((0, 0)), (10, 20, 30, 128))
+            self.assertNotIn("old", [r["sha256"] for r in library.read_catalog(root)])
+
 
 class BrandTest(unittest.TestCase):
     """A brand look is a folder outside the repo; the builder picks it up and inlines its files."""
@@ -418,6 +480,9 @@ class LibraryTest(unittest.TestCase):
         pub = Path(self.tmp.name) / "pub"
         self.assertEqual(library_publish.publish(self.root, pub, ["bright"]), (1, 0))
         self.assertEqual(library_publish.publish(self.root, pub, ["bright"]), (0, 1))
+        later = (pub / "bright" / "box.webp").stat().st_mtime + 10
+        os.utime(self.root / "bright" / "box.png", (later, later))
+        self.assertEqual(library_publish.publish(self.root, pub, ["bright"]), (1, 0))  # re-cut file: replaced
         self.assertEqual([r["file"] for r in library.read_catalog(pub)], ["bright/box.webp"])
         self.assertEqual(max(Image.open(pub / "bright" / "box.webp").size), 512)
         self.assertFalse((pub / "acme").exists())

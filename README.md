@@ -33,7 +33,11 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 # one-off: download FLUX.2 Klein 4B (Apache-2.0) and keep a 4-bit copy that loads fast
 ~/.local/share/iwe-imagegen/venv/bin/mflux-save --model flux2-klein-4b --quantize 4 \
     --path ~/.local/share/iwe-imagegen/models/flux2-klein-4b-q4
+# cutting the background: BiRefNet (MIT), ~900 MB of weights on the first cut
+~/.local/share/iwe-imagegen/venv/bin/pip install torch torchvision transformers timm kornia einops
 ```
+
+Фон картинки отрезает модель отделения предмета от фона (BiRefNet): она смотрит на форму предмета, поэтому белые и бледные части остаются. Без неё навык режет фон по белому от краёв, и белые части, касающиеся фона, уходят вместе с ним. Картинки, нарисованные раньше, перерезает `engine/cutout.py recut`.
 
 После сохранения полную копию модели из кэша Hugging Face (`~/.cache/huggingface/hub`) можно удалить: навык берёт сжатую копию, картинка рисуется за 35-50 секунд. Без сжатой копии модель пересжимается при каждом запуске, и Мак уходит в подкачку.
 
@@ -42,7 +46,7 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 Картинки, уже нарисованные моделью FLUX.2 Klein 4B на Маке, в десяти встроенных обликах: 85 сюжетов
 (серверы, базы данных, документы, логистика, лаборатория, люди, процессы и др.), по пять вариантов.
 Каталог `library/catalog.tsv` с русскими подписями, страница просмотра `library/index.html`.
-Сжаты в WebP до 512 точек. Брак (не тот предмет, съеденные белые части) в библиотеку не попадает.
+Сжаты в WebP до 512 точек. Фон обрезан моделью BiRefNet (23.10.2026 перерезаны и картинки, у которых обрезка по белому съела белые части). Брак (не тот предмет) в библиотеку не попадает.
 
 ```bash
 python3 -I engine/library.py find сервер авария --look bright      # что подходит, сначала облик страницы

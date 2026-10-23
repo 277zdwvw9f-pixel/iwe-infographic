@@ -43,6 +43,8 @@ def publish(source: Path, dest: Path, looks: list[str], size: int = 512, quality
             alias: str = "", skip: frozenset[str] = frozenset()) -> tuple[int, int]:
     """Copy catalog rows of the given looks as WebP into dest; returns (added, kept).
 
+    A picture already published is replaced when its library file is newer (re-cut, redrawn).
+
     alias publishes one local look under a built-in name (its folder and look field are renamed);
     skip lists library files (look/name.png) that must stay local, e.g. pictures not reviewed yet."""
     if alias and len(looks) != 1:
@@ -59,11 +61,11 @@ def publish(source: Path, dest: Path, looks: list[str], size: int = 512, quality
         look = alias or r["look"]
         rel = look + "/" + r["file"].split("/", 1)[1].rsplit(".", 1)[0] + ".webp"
         out = dest / rel
-        if rel in published and out.exists():
-            kept += 1
-            continue
         src = source / r["file"]
         if not src.exists():
+            continue
+        if rel in published and out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
+            kept += 1
             continue
         img = Image.open(src).convert("RGBA")
         img.thumbnail((size, size))
