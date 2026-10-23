@@ -272,6 +272,21 @@ class GenImageTest(unittest.TestCase):
 class CutoutTest(unittest.TestCase):
     """A re-cut keeps a first copy, always starts from it, updates the catalog and resumes."""
 
+    @unittest.skipUnless(importlib.util.find_spec("cv2") and importlib.util.find_spec("PIL"), "the image-generation environment")
+    def test_planes(self):
+        from PIL import Image, ImageDraw
+
+        img = Image.new("RGBA", (100, 100), (255, 255, 255, 0))
+        d = ImageDraw.Draw(img)
+        d.rectangle((10, 10, 90, 90), fill=(30, 30, 30, 255))  # a dark rim around
+        d.rectangle((20, 20, 80, 80), fill=(235, 235, 230, 0))  # a shaded light face the model dropped
+        d.rectangle((2, 2, 8, 8), fill=(30, 30, 30, 255))  # a small ring ...
+        d.point((5, 5), fill=(255, 255, 255, 0))  # ... around plain background white
+        out = cutout.fill_planes(img)
+        self.assertEqual(out.getpixel((50, 50))[3], 255)  # the face is back
+        self.assertEqual(out.getpixel((50, 50))[:3], (235, 235, 230))  # with its own colour
+        self.assertEqual(out.getpixel((95, 95))[3], 0)  # outside stays transparent
+
     @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow lives in the image-generation environment")
     def test_recut(self):
         from PIL import Image
@@ -287,9 +302,10 @@ class CutoutTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "bright").mkdir()
-            for name in ("a", "b"):
+            for name in ("a", "b", "sky"):
                 Image.new("RGBA", (8, 8), (10, 20, 30, 255)).save(root / "bright" / f"{name}.png")
-            library.write_catalog(root, [{"file": f"bright/{n}.png", "look": "bright", "sha256": "old"} for n in ("a", "b")])
+            rows = [{"file": f"bright/{n}.png", "look": "bright", "style": "iso", "sha256": "old"} for n in ("a", "b")]
+            library.write_catalog(root, rows + [{"file": "bright/sky.png", "look": "bright", "style": "backdrop", "sha256": "old"}])
             saved = cutout.cut_model
             cutout.cut_model = fake
             try:
@@ -302,7 +318,8 @@ class CutoutTest(unittest.TestCase):
             self.assertTrue((root / cutout.BACKUP / "bright" / "a.png").exists())
             self.assertEqual(seen[-1][3], 255)  # the repeat started from the first copy, not the cut file
             self.assertEqual(Image.open(root / "bright" / "a.png").getpixel((0, 0)), (10, 20, 30, 128))
-            self.assertNotIn("old", [r["sha256"] for r in library.read_catalog(root)])
+            self.assertEqual([r["sha256"] for r in library.read_catalog(root)].count("old"), 1)  # only the backdrop
+            self.assertEqual(Image.open(root / "bright" / "sky.png").getpixel((0, 0))[3], 255)  # a backdrop is never cut
 
 
 class BrandTest(unittest.TestCase):

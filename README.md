@@ -34,7 +34,7 @@ python3.11 -m venv ~/.local/share/iwe-imagegen/venv
 ~/.local/share/iwe-imagegen/venv/bin/mflux-save --model flux2-klein-4b --quantize 4 \
     --path ~/.local/share/iwe-imagegen/models/flux2-klein-4b-q4
 # cutting the background: BiRefNet (MIT), ~900 MB of weights on the first cut
-~/.local/share/iwe-imagegen/venv/bin/pip install torch torchvision transformers timm kornia einops
+~/.local/share/iwe-imagegen/venv/bin/pip install torch torchvision transformers timm kornia einops opencv-python-headless
 ```
 
 Фон картинки отрезает модель отделения предмета от фона (BiRefNet): она смотрит на форму предмета, поэтому белые и бледные части остаются. Без неё навык режет фон по белому от краёв, и белые части, касающиеся фона, уходят вместе с ним. Картинки, нарисованные раньше, перерезает `engine/cutout.py recut`.
